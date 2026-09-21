@@ -96,30 +96,6 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 @media(max-width:700px){.pexels-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.pexels-hotel-search{display:none!important}}
 
-
-/* Header v10.18 — compact travel-card design */
-.travel-header{
-position:relative;overflow:hidden;margin:0 0 14px;padding:16px 20px;
-border-radius:20px;color:#fff;
-background:linear-gradient(125deg,#123b50 0%,#176477 55%,#6ebbb4 100%);
-box-shadow:0 8px 24px rgba(18,59,80,.16);
-}
-.travel-header:after{content:"";position:absolute;width:260px;height:260px;right:-120px;top:-180px;border:1px solid rgba(255,255,255,.2);border-radius:50%;box-shadow:0 0 0 28px rgba(255,255,255,.045),0 0 0 56px rgba(255,255,255,.035);}
-.travel-header .header-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.travel-header .eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;opacity:.72;margin-bottom:5px}
-.travel-header h1{margin:0;font-size:25px;line-height:1.05;font-weight:800;letter-spacing:-.035em}
-.travel-header .header-meta{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:9px}
-.travel-header .date-pill{font-size:10px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
-.travel-header .header-mark{font-size:34px;opacity:.9;filter:drop-shadow(0 5px 8px rgba(0,0,0,.12))}
-@media print{.travel-header{margin:0 0 8px;padding:11px 14px;border-radius:12px;box-shadow:none}.travel-header h1{font-size:20px}.travel-header .header-mark{font-size:26px}}
-
-
-.pexels-search-row input[readonly]{
-  background:#f3f6f7;
-  color:#5f7077;
-  cursor:default;
-}
-
 </style>
 </head>
 <body>
@@ -157,7 +133,7 @@ box-shadow:0 8px 24px rgba(18,59,80,.16);
           <div><label>Subtítulo</label><input id="tripSubtitle" placeholder="Ej. Octubre 2026 · 7 noches"></div>
           <div><label>Fecha de inicio</label><input id="tripStartDate" type="date"></div>
           <div><label>Fecha de fin</label><input id="tripEndDate" type="date"></div>
-          
+          <div><label>Fecha del viaje</label><input id="tripDate" type="date"></div>
         </div>
         <div style="margin-top:12px" class="file-url">
           <label>📸 Foto para el encabezado</label>
@@ -178,7 +154,7 @@ box-shadow:0 8px 24px rgba(18,59,80,.16);
             <button class="type-tab active" data-type="Vuelos" onclick="setType('Vuelos')">✈️ Vuelos</button>
             <button class="type-tab" data-type="Hoteles" onclick="setType('Hoteles')">🏨 Hoteles</button>
             <button class="type-tab" data-type="Traslados" onclick="setType('Traslados')">🚐 Traslados</button>
-            <button class="type-tab" data-type="Coches" onclick="setType("Coches")">🖨️ Imprimir</button>
+            <button class="type-tab" data-type="Imprimir" onclick="setType('Imprimir')">🖨️ Imprimir</button>
           </div>
 
           <div id="flightFields">
@@ -188,15 +164,15 @@ box-shadow:0 8px 24px rgba(18,59,80,.16);
               <div><label>Hora de salida</label><input id="flightDeparture" type="time"></div>
               <div><label>Hora de llegada</label><input id="flightArrival" type="time"></div>
               <div><label>Compañía</label><input id="flightCompany" placeholder="Ryanair">
-
+<div class="logo-auto-row">
+  <button type="button" onclick="setAutoLogo('flight')">✨ Logo automático</button>
+  <button type="button" onclick="logoPreview('flight')">👁️ Ver logo</button>
+</div>
 <div class="logo-actions">
   <button type="button" onclick="findBrandfetchLogo(document.getElementById('flightCompany')?.value || (typeof hotelCompanyValue==='function' ? hotelCompanyValue() : ''), 'flight')">🔎 Logo Brandfetch</button>
 </div>
 <div id="flightLogoStatus" class="logo-status"></div>
-<div class="brandfetch-control" id="flightBrandfetchControl">
-<button type="button" onclick="findBrandfetchLogo(document.getElementById('flightCompany')?.value || (typeof hotelCompanyValue==='function'?hotelCompanyValue():''), 'flight')">✨ Buscar logo con Brandfetch</button>
-<span id="flightLogoStatus" class="logo-status"></span>
-</div><div id="flightLogoPreview" class="logo-preview"></div></div>
+<div id="flightLogoPreview" class="logo-preview"></div></div>
               <div class="file-url"><label>Logo de la compañía</label><input id="flightLogo" type="file" accept="image/*"><input id="flightLogoUrl" type="url" placeholder="O URL del logo">
 <div id="flightLogoPreview" class="logo-preview"></div></div>
             </div>
@@ -210,11 +186,12 @@ box-shadow:0 8px 24px rgba(18,59,80,.16);
             <div class="file-url" style="margin-top:12px"><label>Foto del hotel</label><input id="hotelPhoto" type="file" accept="image/*"><div class="pexels-hotel-search">
 <div class="pexels-title">📷 Foto del hotel</div>
 <div class="pexels-search-row">
-<input id="hotelPexelsQuery" type="text" placeholder="Se utilizará automáticamente el nombre del hotel" readonly>
+<input id="hotelPexelsQuery" type="text" placeholder="Se utilizará automáticamente el nombre del establecimiento" readonly>
 <button type="button" onclick="searchPexelsHotel()">Buscar fotos en Pexels</button>
 </div>
 <div id="hotelPexelsStatus" class="logo-status"></div>
 <div id="hotelPexelsResults" class="pexels-results"></div>
+<div class="pexels-attribution">Fotos proporcionadas por <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a></div>
 </div><input id="hotelPhotoUrl" type="url" placeholder="O URL de la foto"></div>
           </div>
 
@@ -223,15 +200,15 @@ box-shadow:0 8px 24px rgba(18,59,80,.16);
               <div><label>Origen</label><input id="transferOrigin" placeholder="Aeropuerto"></div>
               <div><label>Destino</label><input id="transferDestination" placeholder="Hotel"></div>
               <div><label>Compañía</label><input id="transferCompany" placeholder="Líneas Romero / Cicar">
-
+<div class="logo-auto-row">
+  <button type="button" onclick="setAutoLogo('transfer')">✨ Logo automático</button>
+  <button type="button" onclick="logoPreview('transfer')">👁️ Ver logo</button>
+</div>
 <div class="logo-actions">
   <button type="button" onclick="findBrandfetchLogo(document.getElementById('transferCompany')?.value || (typeof hotelCompanyValue==='function' ? hotelCompanyValue() : ''), 'transfer')">🔎 Logo Brandfetch</button>
 </div>
 <div id="transferLogoStatus" class="logo-status"></div>
-<div class="brandfetch-control" id="transferBrandfetchControl">
-<button type="button" onclick="findBrandfetchLogo(document.getElementById('transferCompany')?.value || (typeof hotelCompanyValue==='function'?hotelCompanyValue():''), 'transfer')">✨ Buscar logo con Brandfetch</button>
-<span id="transferLogoStatus" class="logo-status"></span>
-</div><div id="transferLogoPreview" class="logo-preview"></div></div>
+<div id="transferLogoPreview" class="logo-preview"></div></div>
               <div class="file-url"><label>Logo</label><input id="transferLogo" type="file" accept="image/*"><input id="transferLogoUrl" type="url" placeholder="O URL del logo"></div>
             </div>
           </div>
@@ -308,7 +285,7 @@ function toggleItemPassenger(n){selectedItemPassengers=selectedItemPassengers.in
 function renderPassengers(){ $('passengerList').innerHTML=passengers.length?passengers.map(n=>`<button class="passenger-chip" onclick="removePassenger('${esc(n)}')">${esc(n)} ×</button>`).join(''):'<span class="muted">Añade pasajeros para poder repartir los costes.</span>'}
 function removePassenger(n){passengers=passengers.filter(x=>x!==n);selectedItemPassengers=selectedItemPassengers.filter(x=>x!==n);render();persist()}
 function renderItemPassengers(){$('itemPassengers').innerHTML=passengers.length?passengers.map(n=>`<button type="button" class="passenger-chip ${selectedItemPassengers.includes(n)?'selected':''}" onclick="toggleItemPassenger('${esc(n)}')">${esc(n)}</button>`).join(''):'<span class="muted">Añade pasajeros arriba.</span>'}
-function setType(t){type=t;document.querySelectorAll('.type-tab').forEach(b=>b.classList.toggle('active',b.dataset.type===t));$('flightFields').classList.toggle('hidden',t!=='Vuelos');$('hotelFields').classList.toggle('hidden',t!=='Hoteles');$('transferFields').classList.toggle('hidden',t!=='Traslados');$('printFields').classList.toggle('hidden',t!=="Coches")}
+function setType(t){type=t;document.querySelectorAll('.type-tab').forEach(b=>b.classList.toggle('active',b.dataset.type===t));$('flightFields').classList.toggle('hidden',t!=='Vuelos');$('hotelFields').classList.toggle('hidden',t!=='Hoteles');$('transferFields').classList.toggle('hidden',t!=='Traslados');$('printFields').classList.toggle('hidden',t!=='Imprimir')}
 function renderStars(){$('hotelStars').innerHTML=['1','2','3','4','5','5 Gran Lujo','5 Lujo'].map(s=>`<button type="button" class="star-option ${selectedStars===s?'selected':''}" onclick="selectedStars='${s}';renderStars()">${s.includes(' ')?'5 🌟 '+s.split(' ')[1]+' Lujo':s+' 🌟'}</button>`).join('')}
 async function addItem(){
   const price=Number($('itemPrice').value);if(!Number.isFinite(price)||price<0){alert('Introduce un precio válido.');return}
@@ -317,7 +294,7 @@ async function addItem(){
   if(type==='Vuelos'){item.origin=$('flightOrigin').value.trim();item.destination=$('flightDestination').value.trim();item.departure=$('flightDeparture').value;item.arrival=$('flightArrival').value;item.company=$('flightCompany').value.trim();item.logo=await imageValue('flightLogo','flightLogoUrl')}
   if(type==='Hoteles'){item.name=$('hotelName').value.trim();item.stars=selectedStars;item.photo=await imageValue('hotelPhoto','hotelPhotoUrl')}
   if(type==='Traslados'){item.origin=$('transferOrigin').value.trim();item.destination=$('transferDestination').value.trim();item.company=$('transferCompany').value.trim();item.logo=await imageValue('transferLogo','transferLogoUrl')}
-  if(type==="Coches"){item.title=$('printTitle').value.trim()}
+  if(type==='Imprimir'){item.title=$('printTitle').value.trim()}
   if(!item.photo)item.photo=await imageValue('itemPhoto','itemPhotoUrl')
   items.push(item);clearItemForm();render();persist()
 }
@@ -336,7 +313,7 @@ function renderItems(){
   if(x.type==='Vuelos') body=`<div class="item-head"><div><div class="item-title">✈️ ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div><div class="item-meta">${esc(x.company||'Sin compañía')}</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div><div class="detail-grid"><div class="detail"><small>Origen</small><b>${esc(x.origin||'—')}</b></div><div class="detail"><small>Destino</small><b>${esc(x.destination||'—')}</b></div><div class="detail"><small>Horario</small><b>${esc(x.departure||'—')} → ${esc(x.arrival||'—')}</b></div></div>${x.logo?`<div class="brand-row"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}`;
   else if(x.type==='Hoteles') body=`${x.photo?`<img class="item-photo hotel-photo" src="${esc(x.photo)}" alt="Hotel">`:''}<div class="item-head"><div><div class="item-title">🏨 ${esc(x.name||'Hotel')}</div><div class="item-meta">${esc(x.stars||'5')} 🌟</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
   else if(x.type==='Traslados') body=`<div class="item-head"><div><div class="item-title">🚐 ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div><div class="item-meta">${esc(x.company||'Sin compañía')}</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>${x.logo?`<div class="brand-row transfer-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}`;
-  else body=`<div class="item-head"><div><div class="item-title">🖨️ ${esc(x.title||"Coches")}</div><div class="item-meta">Bloque para impresión</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
+  else body=`<div class="item-head"><div><div class="item-title">🖨️ ${esc(x.title||'Imprimir')}</div><div class="item-meta">Bloque para impresión</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
   return `<article class="item" draggable="true" data-index="${i}">${x.photo&&x.type!=='Hoteles'?`<img class="item-photo" src="${esc(x.photo)}" alt="Foto">`:''}${body}${x.date?`<div class="item-meta" style="margin-top:8px"><b>${formatDate(x.date)}</b></div>`:''}<div class="item-meta" style="margin-top:12px">Pasajeros: ${x.passengers.map(esc).join(', ')}</div><div class="actions screen-only" style="margin-top:12px"><button class="btn small" onclick="moveItem(${i},-1)" ${i===0?'disabled':''}>↑ Subir</button><button class="btn small" onclick="moveItem(${i},1)" ${i===items.length-1?'disabled':''}>↓ Bajar</button><button class="btn small danger remove" onclick="removeItem(${i})">Eliminar</button></div></article>`
  }).join('');
  enableDrag()
@@ -433,7 +410,7 @@ function renderPrint(){
         <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div>
       </article>`;
     }
-    return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||"Coches")}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
+    return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||'Imprimir')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
       <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
       <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div></article>`;
   }).join('');
@@ -562,143 +539,121 @@ document.addEventListener("change", (e)=>{
 });
 
 
+
+
+
 const PEXELS_API_KEY = "qI70c6etr0QYKUWqcRPGFNVTf6rbSoglIERqbK87Zv7vR9SkJEUBbrnm";
 
-
-
-
-
-
 function getHotelNameForPexels(){
-  const candidates = [
-    document.getElementById("hotelName"),
-    document.getElementById("hotelEstablishment"),
-    document.querySelector('[name="hotelName"]'),
-    document.querySelector('[name="establishment"]')
-  ];
-  for(const el of candidates){
+  const ids = ["hotelName","hotelEstablishment"];
+  for(const id of ids){
+    const el=document.getElementById(id);
     if(el && el.value && el.value.trim()) return el.value.trim();
   }
-  if(typeof hotelCompanyValue === "function"){
-    const v = hotelCompanyValue();
+  if(typeof hotelCompanyValue==="function"){
+    const v=hotelCompanyValue();
     if(v && String(v).trim()) return String(v).trim();
   }
   return "";
 }
 
 async function searchPexelsHotel(){
-  const hotelName = getHotelNameForPexels();
-  const queryInput = document.getElementById("hotelPexelsQuery");
-  const status = document.getElementById("hotelPexelsStatus");
-  const grid = document.getElementById("hotelPexelsResults");
+  const hotelName=getHotelNameForPexels();
+  const qEl=document.getElementById("hotelPexelsQuery");
+  const status=document.getElementById("hotelPexelsStatus");
+  const grid=document.getElementById("hotelPexelsResults");
+  if(qEl) qEl.value=hotelName;
 
-  // No duplicate typing: hotel name is the source of truth.
-  const query = hotelName;
-  if(queryInput) queryInput.value = query;
-
-  if(!query){
-    if(status) status.textContent = "Escribe primero el nombre del establecimiento.";
+  if(!hotelName){
+    if(status) status.textContent="Escribe primero el nombre del establecimiento.";
     return;
   }
 
-  if(status) status.textContent = "Buscando fotos de " + query + "…";
-  if(grid) grid.innerHTML = "";
+  if(location.protocol==="file:"){
+    if(status) status.textContent="ℹ️ La búsqueda de Pexels necesita abrir la web desde GitHub Pages (Chrome bloquea esta API desde file://).";
+    return;
+  }
+
+  if(status) status.textContent="Buscando fotos de "+hotelName+"…";
+  if(grid) grid.innerHTML="";
+
+  const searches=[
+    hotelName,
+    hotelName+" hotel"
+  ];
 
   try{
-    const url = "https://api.pexels.com/v1/search?query=" +
-      encodeURIComponent(query) +
-      "&per_page=8&orientation=landscape";
-
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Authorization": PEXELS_API_KEY,
-        "Accept": "application/json"
-      }
-    });
-
-    if(!res.ok){
-      let detail = "";
-      try { detail = await res.text(); } catch(e){}
-      console.error("Pexels error", res.status, detail);
-      throw new Error("HTTP " + res.status);
-    }
-
-    const data = await res.json();
-    const photos = Array.isArray(data.photos) ? data.photos : [];
-
-    if(!photos.length){
-      // Second attempt with a useful hotel qualifier, still based automatically
-      // on the establishment name.
-      const retryUrl = "https://api.pexels.com/v1/search?query=" +
-        encodeURIComponent(query + " hotel") +
-        "&per_page=8&orientation=landscape";
-      const retry = await fetch(retryUrl, {
-        headers: {"Authorization": PEXELS_API_KEY, "Accept":"application/json"}
+    let photos=[];
+    for(const query of searches){
+      const url="https://api.pexels.com/v1/search?query="+encodeURIComponent(query)+
+        "&per_page=8&orientation=landscape&locale=es-ES";
+      const res=await fetch(url,{
+        method:"GET",
+        mode:"cors",
+        cache:"no-store",
+        headers:{
+          "Authorization":PEXELS_API_KEY,
+          "Accept":"application/json"
+        }
       });
-      if(retry.ok){
-        const retryData = await retry.json();
-        photos.push(...(retryData.photos || []));
+      if(!res.ok){
+        let detail="";
+        try{detail=await res.text();}catch(e){}
+        throw new Error("Pexels HTTP "+res.status+(detail?" — "+detail.slice(0,120):""));
       }
+      const data=await res.json();
+      photos=data.photos||[];
+      if(photos.length) break;
     }
 
     if(!photos.length){
-      if(status) status.textContent = "Pexels no ha encontrado fotos para este hotel.";
+      if(status) status.textContent="Pexels no ha encontrado fotos para «"+hotelName+"».";
       return;
     }
 
-    if(status) status.textContent = "Selecciona una foto:";
+    if(status) status.textContent="Selecciona una foto:";
 
-    photos.forEach(photo => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "pexels-photo-option";
+    photos.forEach(photo=>{
+      const card=document.createElement("button");
+      card.type="button";
+      card.className="pexels-photo-option";
 
-      const img = document.createElement("img");
-      img.src = photo.src?.medium || photo.src?.large || photo.src?.original || "";
-      img.alt = photo.alt || ("Foto de " + query);
-      img.loading = "lazy";
+      const img=document.createElement("img");
+      img.src=photo.src?.medium||photo.src?.large||"";
+      img.alt=photo.alt||("Foto de "+hotelName);
+      img.loading="lazy";
 
-      const credit = document.createElement("span");
-      credit.textContent = photo.photographer || "Pexels";
+      const credit=document.createElement("span");
+      credit.textContent=photo.photographer||"Pexels";
 
-      button.appendChild(img);
-      button.appendChild(credit);
+      card.appendChild(img);
+      card.appendChild(credit);
 
-      button.addEventListener("click", () => {
-        const selectedUrl = photo.src?.large2x || photo.src?.large || photo.src?.original || photo.src?.medium;
-
-        const urlEl =
-          document.getElementById("hotelPhotoUrl") ||
-          document.getElementById("hotelImageUrl");
-
+      card.addEventListener("click",()=>{
+        const url=photo.src?.large2x||photo.src?.large||photo.src?.original||photo.src?.medium;
+        const urlEl=document.getElementById("hotelPhotoUrl")||document.getElementById("hotelImageUrl");
         if(urlEl){
-          urlEl.value = selectedUrl;
-          urlEl.dispatchEvent(new Event("input", {bubbles:true}));
-          urlEl.dispatchEvent(new Event("change", {bubbles:true}));
+          urlEl.value=url;
+          urlEl.dispatchEvent(new Event("input",{bubbles:true}));
+          urlEl.dispatchEvent(new Event("change",{bubbles:true}));
         }
-
-        const preview =
-          document.getElementById("hotelPhotoPreview") ||
-          document.getElementById("hotelImagePreview");
-
+        const preview=document.getElementById("hotelPhotoPreview")||document.getElementById("hotelImagePreview");
         if(preview){
-          preview.innerHTML = "";
-          const selectedImg = document.createElement("img");
-          selectedImg.src = selectedUrl;
-          selectedImg.alt = "Foto del hotel";
-          preview.appendChild(selectedImg);
+          preview.innerHTML="";
+          const selected=document.createElement("img");
+          selected.src=url;
+          selected.alt="Foto del hotel";
+          preview.appendChild(selected);
         }
-
-        if(status) status.textContent = "✓ Foto seleccionada";
+        const creditEl=document.getElementById("hotelPhotoCredit");
+        if(creditEl) creditEl.value="Foto: "+(photo.photographer||"Pexels")+" · Pexels";
+        if(status) status.textContent="✓ Foto seleccionada";
       });
-
-      grid?.appendChild(button);
+      grid?.appendChild(card);
     });
-  }catch(error){
-    console.error("Pexels search failed:", error);
-    if(status) status.textContent =
-      "No se pudo conectar con Pexels. La clave o el acceso a la API no están funcionando.";
+  }catch(err){
+    console.error("Pexels:",err);
+    if(status) status.textContent="❌ "+(err.message||"No se pudo conectar con Pexels");
   }
 }
 
