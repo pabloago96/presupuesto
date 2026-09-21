@@ -35,13 +35,47 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 .empty{text-align:center;padding:35px;color:var(--muted);border:1px dashed #b9ccd3;border-radius:16px}
 .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;border:0;border-radius:50%;width:56px;height:56px;background:var(--navy);color:#fff;font-size:22px;box-shadow:0 10px 25px rgba(0,0,0,.2)}
 @media(max-width:800px){.wrap{padding:12px}.layout{grid-template-columns:1fr}.summary{position:static}.hero{min-height:205px;border-radius:20px;padding:22px}.hero h1{font-size:33px}.form-grid,.form-grid.three{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr 1fr}.item-head{align-items:flex-start}.brand-row img{max-width:170px;max-height:65px}.transfer-brand img{max-width:150px;max-height:58px}input,select,.btn{min-height:44px;font-size:16px}}
+.print-only{display:none}
 @media print{
- body{background:#fff}.wrap{max-width:none;padding:0}.hero{height:220px;min-height:220px;border-radius:0;margin:0 0 18px;box-shadow:none}.layout{display:block}.summary,.editor,.type-tabs,.top-actions,.screen-only,.home{display:none!important}.panel{border:0;box-shadow:none;padding:0}.items{margin:0}.item{break-inside:avoid;box-shadow:none;margin-bottom:12px}.remove{display:none!important}.item-photo{max-height:260px}.detail{background:#f4f8fa}.print-hide{display:none!important}
+  @page{size:A4;margin:14mm 13mm 16mm}
+  html,body{background:#fff!important}
+  body{color:#16333d}
+  #app,#home,.fab{display:none!important}
+  #printArea{display:block!important}
+  .print-cover{height:78mm;border-radius:10mm;background-size:cover;background-position:center;position:relative;overflow:hidden;margin-bottom:8mm;color:#fff}
+  .print-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,49,65,.88),rgba(7,49,65,.18))}
+  .print-cover-content{position:absolute;z-index:1;left:12mm;bottom:11mm;right:12mm}
+  .print-cover h1{font-size:30pt;line-height:1.05;margin:0 0 4mm;color:#fff}
+  .print-cover p{font-size:12pt;margin:0;color:#eef7f9}
+  .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 1mm 5mm;margin-bottom:7mm}
+  .print-summary h2{margin:0;font-size:17pt}
+  .print-total{font-size:23pt;font-weight:950;color:#073141}
+  .print-passengers{font-size:9pt;color:#6d8088;margin-top:2mm}
+  .print-items{display:grid;gap:5mm}
+  .print-card{border:1px solid #dbe6ea;border-radius:5mm;padding:5mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
+  .print-card.hotel{padding:0;overflow:hidden}
+  .print-card.hotel .print-card-body{padding:5mm}
+  .print-hotel-photo{width:100%;height:62mm;object-fit:cover;display:block}
+  .print-card-head{display:flex;justify-content:space-between;gap:8mm;align-items:flex-start}
+  .print-title{font-size:15pt;font-weight:950;line-height:1.15}
+  .print-subtitle{font-size:9.5pt;color:#6d8088;margin-top:1.5mm}
+  .print-price{text-align:right;font-size:15pt;font-weight:950;white-space:nowrap}
+  .print-per{font-size:8.5pt;color:#6d8088;font-weight:750;margin-top:1mm}
+  .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:3mm;margin-top:4mm}
+  .print-detail{background:#f4f8fa;border-radius:3mm;padding:3mm}
+  .print-detail small{display:block;color:#6d8088;font-size:7pt;font-weight:900;text-transform:uppercase}
+  .print-detail b{display:block;margin-top:1mm;font-size:9.5pt}
+  .print-brand{display:flex;justify-content:space-between;align-items:center;gap:8mm;border-top:1px solid #dbe6ea;margin-top:4mm;padding-top:4mm}
+  .print-brand img{max-width:48mm;max-height:20mm;object-fit:contain}
+  .print-transfer .print-brand img{max-width:40mm;max-height:15mm}
+  .print-photo{width:100%;max-height:55mm;object-fit:cover;border-radius:3mm;margin-bottom:4mm}
+  .print-footer{margin-top:7mm;text-align:center;font-size:8pt;color:#8a9ba1}
 }
 </style>
 </head>
 <body>
 
+<div id="printArea" class="print-only"></div>
 <div id="home" class="home hidden">
   <div class="home-card">
     <div class="hero" style="min-height:230px;margin-bottom:18px">
@@ -154,13 +188,13 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
       <div id="grandTotal" class="total">0,00 €</div>
       <div id="summaryRows"></div>
       <div class="actions" style="margin-top:16px">
-        <button class="btn" onclick="window.print()">🖨️ Generar PDF</button>
+        <button class="btn" onclick="renderPrint();window.print()">🖨️ Generar PDF</button>
         <button class="btn secondary" onclick="saveBudget()">💾 Guardar</button>
       </div>
     </aside>
   </div>
 </div>
-<button class="fab" onclick="window.print()" aria-label="Generar PDF">🖨️</button>
+<button class="fab" onclick="renderPrint();window.print()" aria-label="Generar PDF">🖨️</button>
 
 <script>
 const STORAGE_KEY='presupuesto-viaje-pwa-v10.1';
@@ -210,7 +244,7 @@ function clearItemForm(){['itemPrice','flightOrigin','flightDestination','flight
 function clearAll(){clearItemForm();['tripPhoto'].forEach(id=>{if($(id))$(id).value=''})}
 function removeItem(i){items.splice(i,1);render();persist()}
 function render(){
-  updateHero();renderPassengers();renderItemPassengers();renderStars();renderItems();renderSummary()
+  updateHero();renderPassengers();renderItemPassengers();renderStars();renderItems();renderSummary();renderPrint()
 }
 function renderItems(){
  const box=$('items');if(!items.length){box.innerHTML='<div class="empty">Todavía no hay items. Añade tu primer vuelo, hotel, traslado o bloque de impresión.</div>';return}
@@ -238,6 +272,66 @@ function syncOrder(){const ids=[...$('items').querySelectorAll('.item')].map(x=>
 $('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{updateHero();persist()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v)setHeroPhoto(v);persist()});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
 async function installPWA(){if(!deferredInstall){alert('En iPhone: Safari → Compartir → Añadir a pantalla de inicio.');return}deferredInstall.prompt();deferredInstall=null}
+
+function renderPrint(){
+  const area=$('printArea');
+  const total=items.reduce((sum,x)=>sum+Number(x.price||0),0);
+  const title=$('tripTitle').value.trim()||'Nombra tu próximo viaje';
+  const subtitle=$('tripSubtitle').value.trim()||'Presupuesto de viaje';
+  const photo=$('tripPhotoUrl').value.trim();
+  const bg=photo ? `background-image:linear-gradient(90deg,rgba(7,49,65,.82),rgba(7,49,65,.18)),url("${esc(photo)}")` : `background-image:linear-gradient(135deg,#0a5268,#176b83)`;
+  const passengerLine=passengers.length ? passengers.join(' · ') : 'Sin pasajeros';
+  let cards=items.map(x=>{
+    const per=x.passengers.length?x.price/x.passengers.length:0;
+    const who=x.passengers.join(', ');
+    if(x.type==='Vuelos'){
+      return `<article class="print-card">
+        ${x.photo?`<img class="print-photo" src="${esc(x.photo)}" alt="">`:''}
+        <div class="print-card-head">
+          <div><div class="print-title">✈️ ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div>
+          <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div></div>
+          <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
+        </div>
+        <div class="print-flight-details">
+          <div class="print-detail"><small>Origen</small><b>${esc(x.origin||'—')}</b></div>
+          <div class="print-detail"><small>Destino</small><b>${esc(x.destination||'—')}</b></div>
+          <div class="print-detail"><small>Horario</small><b>${esc(x.departure||'—')} → ${esc(x.arrival||'—')}</b></div>
+        </div>
+        ${x.logo?`<div class="print-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
+        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div>
+      </article>`;
+    }
+    if(x.type==='Hoteles'){
+      return `<article class="print-card hotel">
+        ${x.photo?`<img class="print-hotel-photo" src="${esc(x.photo)}" alt="">`:''}
+        <div class="print-card-body"><div class="print-card-head">
+          <div><div class="print-title">🏨 ${esc(x.name||'Hotel')}</div><div class="print-subtitle">${esc(x.stars||'5')} 🌟</div></div>
+          <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
+        </div>
+        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></div>
+      </article>`;
+    }
+    if(x.type==='Traslados'){
+      return `<article class="print-card print-transfer">
+        ${x.photo?`<img class="print-photo" src="${esc(x.photo)}" alt="">`:''}
+        <div class="print-card-head"><div><div class="print-title">🚐 ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div>
+        <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div></div>
+        <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
+        ${x.logo?`<div class="print-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
+        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div>
+      </article>`;
+    }
+    return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||'Imprimir')}</div></div>
+      <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
+      <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></article>`;
+  }).join('');
+  area.innerHTML=`<section class="print-cover" style="${bg}">
+    <div class="print-cover-content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div>
+  </section>
+  <div class="print-summary"><div><h2>Resumen del viaje</h2><div class="print-passengers">${esc(passengerLine)}</div></div><div class="print-total">${eur(total)}</div></div>
+  <section class="print-items">${cards || '<div class="print-card">No hay items añadidos.</div>'}</section>
+  <div class="print-footer">Presupuesto · ${new Date().toLocaleDateString('es-ES')}</div>`;
+}
 function boot(){currentId=null;passengers=[];items=[];selectedItemPassengers=[];setType('Vuelos');render();renderHome()}
 boot();
 </script>
