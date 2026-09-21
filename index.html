@@ -199,7 +199,7 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 <script>
 const STORAGE_KEY='presupuesto-viaje-pwa-v10.1';
 const LIST_KEY='presupuesto-viaje-list-v10.1';
-let currentId=null, type='Vuelos', passengers=[], items=[], selectedStars=5, selectedItemPassengers=[];
+let currentId=null, type='Vuelos', passengers=[], items=[], selectedStars=5, selectedItemPassengers=[], headerPhotoData=null;
 let deferredInstall=null;
 
 const $=id=>document.getElementById(id);
@@ -211,10 +211,10 @@ async function imageValue(fileId,urlId){const f=$(fileId)?.files?.[0];if(f)retur
 function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({currentId,passengers,items,title:$('tripTitle').value,subtitle:$('tripSubtitle').value,photo:$('tripPhotoUrl').value}))}catch(e){}}
 function loadList(){try{return JSON.parse(localStorage.getItem(LIST_KEY)||'[]')}catch(e){return[]}}
 function saveList(a){localStorage.setItem(LIST_KEY,JSON.stringify(a))}
-function snapshot(){return {id:currentId||('b'+Date.now()),title:$('tripTitle').value.trim()||'Nuevo viaje',subtitle:$('tripSubtitle').value.trim(),passengers,items,photo:$('tripPhotoUrl').value.trim(),updated:new Date().toISOString()}}
+function snapshot(){return {id:currentId||('b'+Date.now()),title:$('tripTitle').value.trim()||'Nuevo viaje',subtitle:$('tripSubtitle').value.trim(),passengers,items,photo:headerPhotoData||$('tripPhotoUrl').value.trim(),updated:new Date().toISOString()}}
 function saveBudget(){if(!currentId)currentId='b'+Date.now();const s=snapshot(),a=loadList(),i=a.findIndex(x=>x.id===currentId);if(i>=0)a[i]=s;else a.unshift(s);saveList(a);persist();renderHome();alert('Presupuesto guardado');}
-function newBudget(){currentId='b'+Date.now();passengers=[];items=[];clearAll();$('tripTitle').value='';$('tripSubtitle').value='';$('tripPhotoUrl').value='';setHeroPhoto(null);showEditor();render()}
-function openBudget(id){const s=loadList().find(x=>x.id===id);if(!s)return;currentId=s.id;passengers=s.passengers||[];items=s.items||[];$('tripTitle').value=s.title||'';$('tripSubtitle').value=s.subtitle||'';$('tripPhotoUrl').value=s.photo||'';setHeroPhoto(s.photo||null);showEditor();render()}
+function newBudget(){currentId='b'+Date.now();passengers=[];items=[];headerPhotoData=null;clearAll();$('tripTitle').value='';$('tripSubtitle').value='';$('tripPhotoUrl').value='';setHeroPhoto(null);showEditor();render()}
+function openBudget(id){const s=loadList().find(x=>x.id===id);if(!s)return;currentId=s.id;passengers=s.passengers||[];items=s.items||[];headerPhotoData=(s.photo||'').startsWith('data:')?s.photo:null;$('tripTitle').value=s.title||'';$('tripSubtitle').value=s.subtitle||'';$('tripPhotoUrl').value=(s.photo||'').startsWith('data:')?'':(s.photo||'');setHeroPhoto(s.photo||null);showEditor();render()}
 function deleteBudget(id){if(!confirm('¿Eliminar este presupuesto?'))return;saveList(loadList().filter(x=>x.id!==id));renderHome()}
 function showHome(){if(currentId)saveBudgetSilent();renderHome();$('home').classList.remove('hidden');$('app').classList.add('hidden')}
 function showEditor(){$('home').classList.add('hidden');$('app').classList.remove('hidden')}
@@ -241,7 +241,7 @@ async function addItem(){
   items.push(item);clearItemForm();render();persist()
 }
 function clearItemForm(){['itemPrice','flightOrigin','flightDestination','flightDeparture','flightArrival','flightCompany','flightLogoUrl','hotelName','hotelPhotoUrl','transferOrigin','transferDestination','transferCompany','transferLogoUrl','printTitle','itemPhotoUrl'].forEach(id=>{if($(id))$(id).value=''});['flightLogo','hotelPhoto','transferLogo','itemPhoto'].forEach(id=>{if($(id))$(id).value=''});selectedItemPassengers=[...passengers];selectedStars=5;renderStars();renderItemPassengers()}
-function clearAll(){clearItemForm();['tripPhoto'].forEach(id=>{if($(id))$(id).value=''})}
+function clearAll(){clearItemForm();headerPhotoData=null;['tripPhoto'].forEach(id=>{if($(id))$(id).value=''})}
 function removeItem(i){items.splice(i,1);render();persist()}
 function render(){
   updateHero();renderPassengers();renderItemPassengers();renderStars();renderItems();renderSummary();renderPrint()
@@ -269,7 +269,7 @@ function enableDrag(){
  })
 }
 function syncOrder(){const ids=[...$('items').querySelectorAll('.item')].map(x=>Number(x.dataset.index));items=ids.map(i=>items[i]);render();persist()}
-$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{updateHero();persist()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v)setHeroPhoto(v);persist()});
+$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
 async function installPWA(){if(!deferredInstall){alert('En iPhone: Safari → Compartir → Añadir a pantalla de inicio.');return}deferredInstall.prompt();deferredInstall=null}
 
@@ -278,7 +278,7 @@ function renderPrint(){
   const total=items.reduce((sum,x)=>sum+Number(x.price||0),0);
   const title=$('tripTitle').value.trim()||'Nombra tu próximo viaje';
   const subtitle=$('tripSubtitle').value.trim()||'Presupuesto de viaje';
-  const photo=$('tripPhotoUrl').value.trim();
+  const photo=headerPhotoData||$('tripPhotoUrl').value.trim();
   const bg=photo ? `background-image:linear-gradient(90deg,rgba(7,49,65,.82),rgba(7,49,65,.18)),url("${esc(photo)}")` : `background-image:linear-gradient(135deg,#0a5268,#176b83)`;
   const passengerLine=passengers.length ? passengers.join(' · ') : 'Sin pasajeros';
   let cards=items.map(x=>{
@@ -332,7 +332,7 @@ function renderPrint(){
   <section class="print-items">${cards || '<div class="print-card">No hay items añadidos.</div>'}</section>
   <div class="print-footer">Presupuesto · ${new Date().toLocaleDateString('es-ES')}</div>`;
 }
-function boot(){currentId=null;passengers=[];items=[];selectedItemPassengers=[];setType('Vuelos');render();renderHome()}
+function boot(){currentId=null;passengers=[];items=[];headerPhotoData=null;selectedItemPassengers=[];setType('Vuelos');render();renderHome()}
 boot();
 </script>
 </body>
