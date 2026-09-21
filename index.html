@@ -42,9 +42,10 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
   body{color:#16333d}
   #app,#home,.fab{display:none!important}
   #printArea{display:block!important}
-  .print-cover{height:78mm;border-radius:10mm;background-size:cover;background-position:center;position:relative;overflow:hidden;margin-bottom:8mm;color:#fff}
-  .print-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,49,65,.88),rgba(7,49,65,.18))}
-  .print-cover-content{position:absolute;z-index:1;left:12mm;bottom:11mm;right:12mm}
+  .print-cover{height:78mm;border-radius:10mm;position:relative;overflow:hidden;margin-bottom:8mm;color:#fff;background:#0a5268}
+  .print-cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .print-cover-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,49,65,.88),rgba(7,49,65,.18));z-index:1}
+  .print-cover-content{position:absolute;z-index:2;left:12mm;bottom:11mm;right:12mm}
   .print-cover h1{font-size:30pt;line-height:1.05;margin:0 0 4mm;color:#fff}
   .print-cover p{font-size:12pt;margin:0;color:#eef7f9}
   .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 1mm 5mm;margin-bottom:7mm}
@@ -208,7 +209,7 @@ const eur=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).fo
 
 function fileToDataURL(file){return new Promise((resolve,reject)=>{if(!file)return resolve(null);const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
 async function imageValue(fileId,urlId){const f=$(fileId)?.files?.[0];if(f)return await fileToDataURL(f);return $(urlId)?.value?.trim()||null}
-function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({currentId,passengers,items,title:$('tripTitle').value,subtitle:$('tripSubtitle').value,photo:$('tripPhotoUrl').value}))}catch(e){}}
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({currentId,passengers,items,title:$('tripTitle').value,subtitle:$('tripSubtitle').value,photo:headerPhotoData||$('tripPhotoUrl').value.trim()}))}catch(e){}}
 function loadList(){try{return JSON.parse(localStorage.getItem(LIST_KEY)||'[]')}catch(e){return[]}}
 function saveList(a){localStorage.setItem(LIST_KEY,JSON.stringify(a))}
 function snapshot(){return {id:currentId||('b'+Date.now()),title:$('tripTitle').value.trim()||'Nuevo viaje',subtitle:$('tripSubtitle').value.trim(),passengers,items,photo:headerPhotoData||$('tripPhotoUrl').value.trim(),updated:new Date().toISOString()}}
@@ -242,6 +243,7 @@ async function addItem(){
 }
 function clearItemForm(){['itemPrice','flightOrigin','flightDestination','flightDeparture','flightArrival','flightCompany','flightLogoUrl','hotelName','hotelPhotoUrl','transferOrigin','transferDestination','transferCompany','transferLogoUrl','printTitle','itemPhotoUrl'].forEach(id=>{if($(id))$(id).value=''});['flightLogo','hotelPhoto','transferLogo','itemPhoto'].forEach(id=>{if($(id))$(id).value=''});selectedItemPassengers=[...passengers];selectedStars=5;renderStars();renderItemPassengers()}
 function clearAll(){clearItemForm();headerPhotoData=null;['tripPhoto'].forEach(id=>{if($(id))$(id).value=''})}
+function moveItem(i,dir){const j=i+dir;if(j<0||j>=items.length)return;[items[i],items[j]]=[items[j],items[i]];render();persist();setTimeout(()=>{const el=document.querySelector(`.item[data-index="${j}"]`);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'})},0)}
 function removeItem(i){items.splice(i,1);render();persist()}
 function render(){
   updateHero();renderPassengers();renderItemPassengers();renderStars();renderItems();renderSummary();renderPrint()
@@ -255,7 +257,7 @@ function renderItems(){
   else if(x.type==='Hoteles') body=`${x.photo?`<img class="item-photo hotel-photo" src="${esc(x.photo)}" alt="Hotel">`:''}<div class="item-head"><div><div class="item-title">🏨 ${esc(x.name||'Hotel')}</div><div class="item-meta">${esc(x.stars||'5')} 🌟</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
   else if(x.type==='Traslados') body=`<div class="item-head"><div><div class="item-title">🚐 ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div><div class="item-meta">${esc(x.company||'Sin compañía')}</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>${x.logo?`<div class="brand-row transfer-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}`;
   else body=`<div class="item-head"><div><div class="item-title">🖨️ ${esc(x.title||'Imprimir')}</div><div class="item-meta">Bloque para impresión</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
-  return `<article class="item" draggable="true" data-index="${i}">${x.photo&&x.type!=='Hoteles'?`<img class="item-photo" src="${esc(x.photo)}" alt="Foto">`:''}${body}<div class="item-meta" style="margin-top:12px">Pasajeros: ${x.passengers.map(esc).join(', ')}</div><div class="actions screen-only" style="margin-top:12px"><button class="btn small danger remove" onclick="removeItem(${i})">Eliminar</button></div></article>`
+  return `<article class="item" draggable="true" data-index="${i}">${x.photo&&x.type!=='Hoteles'?`<img class="item-photo" src="${esc(x.photo)}" alt="Foto">`:''}${body}<div class="item-meta" style="margin-top:12px">Pasajeros: ${x.passengers.map(esc).join(', ')}</div><div class="actions screen-only" style="margin-top:12px"><button class="btn small" onclick="moveItem(${i},-1)" ${i===0?'disabled':''}>↑ Subir</button><button class="btn small" onclick="moveItem(${i},1)" ${i===items.length-1?'disabled':''}>↓ Bajar</button><button class="btn small danger remove" onclick="removeItem(${i})">Eliminar</button></div></article>`
  }).join('');
  enableDrag()
 }
@@ -269,7 +271,7 @@ function enableDrag(){
  })
 }
 function syncOrder(){const ids=[...$('items').querySelectorAll('.item')].map(x=>Number(x.dataset.index));items=ids.map(i=>items[i]);render();persist()}
-$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
+$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist();renderPrint()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
 async function installPWA(){if(!deferredInstall){alert('En iPhone: Safari → Compartir → Añadir a pantalla de inicio.');return}deferredInstall.prompt();deferredInstall=null}
 
@@ -279,7 +281,7 @@ function renderPrint(){
   const title=$('tripTitle').value.trim()||'Nombra tu próximo viaje';
   const subtitle=$('tripSubtitle').value.trim()||'Presupuesto de viaje';
   const photo=headerPhotoData||$('tripPhotoUrl').value.trim();
-  const bg=photo ? `background-image:linear-gradient(90deg,rgba(7,49,65,.82),rgba(7,49,65,.18)),url("${esc(photo)}")` : `background-image:linear-gradient(135deg,#0a5268,#176b83)`;
+  const coverPhoto=photo ? `<img class="print-cover-photo" src="${esc(photo)}" alt="">` : '';
   const passengerLine=passengers.length ? passengers.join(' · ') : 'Sin pasajeros';
   let cards=items.map(x=>{
     const per=x.passengers.length?x.price/x.passengers.length:0;
@@ -325,7 +327,7 @@ function renderPrint(){
       <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
       <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></article>`;
   }).join('');
-  area.innerHTML=`<section class="print-cover" style="${bg}">
+  area.innerHTML=`<section class="print-cover">${coverPhoto}<div class="print-cover-overlay"></div>
     <div class="print-cover-content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div>
   </section>
   <div class="print-summary"><div><h2>Resumen del viaje</h2><div class="print-passengers">${esc(passengerLine)}</div></div><div class="print-total">${eur(total)}</div></div>
