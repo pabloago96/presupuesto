@@ -42,13 +42,12 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
   body{color:#16333d}
   #app,#home,.fab{display:none!important}
   #printArea{display:block!important}
-  .print-cover{height:15mm;border-radius:0 0 2.5mm 2.5mm;background:linear-gradient(100deg,#f3fafb 0%,#ffffff 58%,#eaf5f7 100%);position:relative;overflow:hidden;margin:-3.5mm -4mm 3mm;color:#123c49;border:1px solid #d6e7eb;border-top:0;box-shadow:0 1.5mm 4mm rgba(7,49,65,.05);print-color-adjust:exact;-webkit-print-color-adjust:exact}
-  .print-cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3mm;background:linear-gradient(180deg,#176b83,#66aeba)}
-  .print-cover::after{content:"✈  ·  ·  ·  ◦";position:absolute;right:7mm;top:3.8mm;font-size:9pt;letter-spacing:4px;color:#72aebb;opacity:.65;transform:rotate(-3deg)}
-  .print-cover-content{position:absolute;z-index:1;left:6mm;top:2.6mm;right:7mm;display:flex;align-items:center;gap:5mm}
-  .print-cover h1{font-size:14pt;line-height:1;margin:0;color:#0a4050;white-space:nowrap}
-  .print-cover p{font-size:7.7pt;margin:1mm 0 0;color:#66808a;white-space:nowrap}
-  .print-cover-date{font-size:7.8pt;font-weight:900;color:#176b83;background:#e5f2f4;border:1px solid #c8e1e6;border-radius:999px;padding:1.5mm 3mm;margin:0 0 0 auto;letter-spacing:.1px;white-space:nowrap}
+  .print-cover{height:20mm;border-radius:0 0 3mm 3mm;background:linear-gradient(100deg,#083a4b 0%,#176b83 55%,#4b9aaa 100%);position:relative;overflow:hidden;margin:-3.5mm -4mm 3.5mm;color:#fff;border:0}
+  .print-cover::before{content:"";position:absolute;width:90mm;height:90mm;border-radius:50%;right:-35mm;top:-55mm;background:rgba(255,255,255,.10)}
+  .print-cover::after{content:"✈  ·  ·  ·";position:absolute;right:7mm;top:5mm;font-size:11pt;letter-spacing:5px;color:rgba(255,255,255,.34);transform:rotate(-4deg)}
+  .print-cover-content{position:absolute;z-index:1;left:6mm;top:3.5mm;right:8mm;display:flex;align-items:center;gap:8mm}
+  .print-cover h1{font-size:16pt;line-height:1;margin:0;color:#fff;white-space:nowrap}
+  .print-cover p{font-size:8.5pt;margin:0;color:rgba(255,255,255,.82);white-space:nowrap}
   .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 0 2.5mm;margin-bottom:3mm}
   .print-summary h2{margin:0;font-size:15pt}
   .print-total{font-size:20pt;font-weight:950;color:#073141}
@@ -57,12 +56,13 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
   .print-card{border:1px solid #dbe6ea;border-radius:3.5mm;padding:2.4mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
   .print-card.hotel{padding:0;overflow:hidden;display:grid;grid-template-columns:38mm 1fr;min-height:30mm}
   .print-card.hotel .print-card-body{padding:2.8mm 3.2mm}
-  .hotel-print-logo{margin-top:1.5mm;display:flex;justify-content:flex-start}.hotel-print-logo img{max-width:32mm;max-height:10mm;object-fit:contain}.print-hotel-photo{width:38mm;height:100%;min-height:30mm;object-fit:cover;object-position:center;display:block}
+  .print-hotel-photo{width:38mm;height:100%;min-height:30mm;object-fit:cover;object-position:center;display:block}
   .print-card-head{display:flex;justify-content:space-between;gap:5mm;align-items:flex-start}
   .print-title{font-size:15pt;font-weight:950;line-height:1.15}
   .print-subtitle{font-size:9.5pt;color:#6d8088;margin-top:1mm}
   .print-price{text-align:right;font-size:15pt;font-weight:950;white-space:nowrap}
   .print-per{font-size:8.5pt;color:#6d8088;font-weight:750;margin-top:1mm}
+  .print-cover-date{font-size:8pt;font-weight:850;color:rgba(255,255,255,.92);margin:0 0 0 auto;letter-spacing:.2px;white-space:nowrap}
   .print-date{font-size:8.2pt;font-weight:850;color:#2d7e90;margin-top:1mm}
   .print-flight-row{display:grid;grid-template-columns:minmax(0,1fr) 30mm;gap:4mm;align-items:center;margin-top:1.5mm}
   .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:2mm;margin-top:0}
@@ -86,6 +86,16 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 .logo-status{font-size:12px;color:#61757d}
 .logo-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
 .logo-actions button{font-size:12px;padding:6px 9px}
+
+.pexels-search-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.pexels-search-row input{flex:1;min-width:180px}
+.pexels-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:8px}
+.pexels-photo-option{padding:0;border:1px solid #ddd;border-radius:10px;background:#fff;overflow:hidden;cursor:pointer;text-align:left}
+.pexels-photo-option img{display:block;width:100%;height:80px;object-fit:cover}
+.pexels-photo-option span{display:block;padding:4px 6px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:700px){.pexels-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.pexels-hotel-search{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -155,10 +165,14 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
               <div><label>Hora de llegada</label><input id="flightArrival" type="time"></div>
               <div><label>Compañía</label><input id="flightCompany" placeholder="Ryanair">
 <div class="logo-auto-row">
-  <button type="button" onclick="findWikimediaLogo('flight')">🔎 Logo de Wikipedia</button>
+  <button type="button" onclick="setAutoLogo('flight')">✨ Logo automático</button>
   <button type="button" onclick="logoPreview('flight')">👁️ Ver logo</button>
 </div>
+<div class="logo-actions">
+  <button type="button" onclick="findBrandfetchLogo(document.getElementById('flightCompany')?.value || (typeof hotelCompanyValue==='function' ? hotelCompanyValue() : ''), 'flight')">🔎 Logo Brandfetch</button>
 </div>
+<div id="flightLogoStatus" class="logo-status"></div>
+<div id="flightLogoPreview" class="logo-preview"></div></div>
               <div class="file-url"><label>Logo de la compañía</label><input id="flightLogo" type="file" accept="image/*"><input id="flightLogoUrl" type="url" placeholder="O URL del logo">
 <div id="flightLogoPreview" class="logo-preview"></div></div>
             </div>
@@ -166,16 +180,9 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 
           <div id="hotelFields" class="hidden">
             <div class="form-grid">
-              <div><label>Nombre de establecimiento</label><input id="hotelName" placeholder="Paradisus Salinas Lanzarote">
-                <div class="logo-auto-row" style="margin-top:7px">
-                  <button type="button" onclick="findWikimediaLogo('hotel')">🔎 Logo de Wikipedia</button>
-                  <button type="button" onclick="logoPreview('hotel')">👁️ Ver logo</button>
-                </div>
-                <div id="hotelLogoPreview" class="logo-preview"></div>
-              </div>
+              <div><label>Nombre de establecimiento</label><input id="hotelName" placeholder="Paradisus Salinas Lanzarote"></div>
               <div><label>Categoría</label><div id="hotelStars" class="stars"></div></div>
             </div>
-            <div class="file-url" style="margin-top:12px"><label>Logo del hotel</label><input id="hotelLogo" type="file" accept="image/*"><input id="hotelLogoUrl" type="url" placeholder="O URL del logo (opcional)"></div>
             <div class="file-url" style="margin-top:12px"><label>Foto del hotel</label><input id="hotelPhoto" type="file" accept="image/*"><input id="hotelPhotoUrl" type="url" placeholder="O URL de la foto"></div>
           </div>
 
@@ -185,10 +192,14 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
               <div><label>Destino</label><input id="transferDestination" placeholder="Hotel"></div>
               <div><label>Compañía</label><input id="transferCompany" placeholder="Líneas Romero / Cicar">
 <div class="logo-auto-row">
-  <button type="button" onclick="findWikimediaLogo('transfer')">🔎 Logo de Wikipedia</button>
+  <button type="button" onclick="setAutoLogo('transfer')">✨ Logo automático</button>
   <button type="button" onclick="logoPreview('transfer')">👁️ Ver logo</button>
 </div>
+<div class="logo-actions">
+  <button type="button" onclick="findBrandfetchLogo(document.getElementById('transferCompany')?.value || (typeof hotelCompanyValue==='function' ? hotelCompanyValue() : ''), 'transfer')">🔎 Logo Brandfetch</button>
 </div>
+<div id="transferLogoStatus" class="logo-status"></div>
+<div id="transferLogoPreview" class="logo-preview"></div></div>
               <div class="file-url"><label>Logo</label><input id="transferLogo" type="file" accept="image/*"><input id="transferLogoUrl" type="url" placeholder="O URL del logo"></div>
             </div>
           </div>
@@ -272,13 +283,13 @@ async function addItem(){
   if(!selectedItemPassengers.length){alert('Selecciona al menos un pasajero para este item.');return}
   const item={type,price,passengers:[...selectedItemPassengers],photo:null,logo:null,date:$('itemDate').value,created:Date.now()};
   if(type==='Vuelos'){item.origin=$('flightOrigin').value.trim();item.destination=$('flightDestination').value.trim();item.departure=$('flightDeparture').value;item.arrival=$('flightArrival').value;item.company=$('flightCompany').value.trim();item.logo=await imageValue('flightLogo','flightLogoUrl')}
-  if(type==='Hoteles'){item.name=$('hotelName').value.trim();item.stars=selectedStars;item.logo=await imageValue('hotelLogo','hotelLogoUrl');item.photo=await imageValue('hotelPhoto','hotelPhotoUrl')}
+  if(type==='Hoteles'){item.name=$('hotelName').value.trim();item.stars=selectedStars;item.photo=await imageValue('hotelPhoto','hotelPhotoUrl')}
   if(type==='Traslados'){item.origin=$('transferOrigin').value.trim();item.destination=$('transferDestination').value.trim();item.company=$('transferCompany').value.trim();item.logo=await imageValue('transferLogo','transferLogoUrl')}
   if(type==='Imprimir'){item.title=$('printTitle').value.trim()}
   if(!item.photo)item.photo=await imageValue('itemPhoto','itemPhotoUrl')
   items.push(item);clearItemForm();render();persist()
 }
-function clearItemForm(){['itemDate','itemPrice','flightOrigin','flightDestination','flightDeparture','flightArrival','flightCompany','flightLogoUrl','hotelName','hotelLogoUrl','hotelPhotoUrl','transferOrigin','transferDestination','transferCompany','transferLogoUrl','printTitle','itemPhotoUrl'].forEach(id=>{if($(id))$(id).value=''});['flightLogo','hotelLogo','hotelPhoto','transferLogo','itemPhoto'].forEach(id=>{if($(id))$(id).value=''});selectedItemPassengers=[...passengers];selectedStars=5;renderStars();renderItemPassengers()}
+function clearItemForm(){['itemDate','itemPrice','flightOrigin','flightDestination','flightDeparture','flightArrival','flightCompany','flightLogoUrl','hotelName','hotelPhotoUrl','transferOrigin','transferDestination','transferCompany','transferLogoUrl','printTitle','itemPhotoUrl'].forEach(id=>{if($(id))$(id).value=''});['flightLogo','hotelPhoto','transferLogo','itemPhoto'].forEach(id=>{if($(id))$(id).value=''});selectedItemPassengers=[...passengers];selectedStars=5;renderStars();renderItemPassengers()}
 function clearAll(){clearItemForm();headerPhotoData=null;['tripPhoto'].forEach(id=>{if($(id))$(id).value=''})}
 function moveItem(i,dir){const j=i+dir;if(j<0||j>=items.length)return;[items[i],items[j]]=[items[j],items[i]];render();persist();setTimeout(()=>{const el=document.querySelector(`.item[data-index="${j}"]`);if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'})},0)}
 function removeItem(i){items.splice(i,1);render();persist()}
@@ -377,7 +388,6 @@ function renderPrint(){
           <div><div class="print-title">🏨 ${esc(x.name||'Hotel')}</div><div class="print-subtitle">${esc(x.stars||'5')} 🌟</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
           <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
         </div>
-        ${x.logo?`<div class="hotel-print-logo"><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
         <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div></div>
       </article>`;
     }
@@ -423,46 +433,29 @@ function autoLogoUrl(name){
   const slug=logoSlug(name);
   return slug ? `https://cdn.simpleicons.org/${encodeURIComponent(slug)}` : "";
 }
-function setLogoField(prefix,url,label){
-  const urlId=prefix==='hotel'?'hotelLogoUrl':prefix+'LogoUrl';
-  const urlEl=$(urlId); if(urlEl) urlEl.value=url||"";
+function setAutoLogo(prefix){
+  const company=$(prefix+"Company")?.value?.trim() || "";
+  const url=autoLogoUrl(company);
+  const urlEl=$(prefix+"LogoUrl");
+  if(urlEl) urlEl.value=url;
   const preview=$(prefix+"LogoPreview");
-  if(preview) preview.innerHTML=url?`<img src="${esc(url)}" alt="Logo"><span class="logo-status">${esc(label||'Logo encontrado')}</span>`:"";
-}
-function setAutoLogo(prefix){findWikimediaLogo(prefix);}
-async function findWikimediaLogo(prefix, explicitName){
-  const name=(explicitName || (prefix==='hotel'?$('hotelName')?.value:$(prefix+'Company')?.value) || '').trim();
-  if(!name){alert(prefix==='hotel'?'Escribe el nombre del hotel o cadena.':'Escribe el nombre de la compañía.');return;}
-  const preview=$(prefix+'LogoPreview');
-  if(preview) preview.innerHTML='<span class="logo-status">🔎 Buscando en Wikimedia Commons…</span>';
-  const queries=[`${name} logo`,`${name} logo.svg`,`${name} official logo`];
-  try{
-    let pages=[];
-    for(const q of queries){
-      const u='https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent(q)+'&gsrnamespace=6&gsrlimit=8&prop=imageinfo&iiprop=url&iiurlwidth=600&format=json&origin=*';
-      const r=await fetch(u); if(!r.ok) continue;
-      const data=await r.json(); const vals=Object.values(data.query?.pages||{});
-      pages.push(...vals);
-      if(vals.some(x=>/logo/i.test(x.title))) break;
-    }
-    if(!pages.length) throw new Error('No results');
-    const best=pages.find(x=>/logo/i.test(x.title)) || pages[0];
-    const info=best.imageinfo?.[0]; const url=info?.thumburl||info?.url;
-    if(!url) throw new Error('No image URL');
-    setLogoField(prefix,url,'Wikimedia Commons · '+best.title.replace(/^File:/i,''));
-  }catch(e){
-    if(preview) preview.innerHTML='<span class="logo-status">No se encontró automáticamente. Puedes pegar una URL o subir el archivo.</span>';
+  if(preview){
+    preview.innerHTML = url ? `<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo automático: ${esc(company)}</span>` : "";
   }
 }
-function clearAutoLogo(prefix){setLogoField(prefix,'','');}
+function clearAutoLogo(prefix){
+  const urlEl=$(prefix+"LogoUrl");
+  if(urlEl) urlEl.value="";
+  const preview=$(prefix+"LogoPreview");
+  if(preview) preview.innerHTML="";
+}
 function logoPreview(prefix){
-  const urlEl=$(prefix==='hotel'?'hotelLogoUrl':prefix+'LogoUrl');
+  const urlEl=$(prefix+"LogoUrl");
   const url=urlEl?.value?.trim()||"";
   const preview=$(prefix+"LogoPreview");
-  if(!preview)return;
-  preview.innerHTML=url?`<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo seleccionado</span>`:"";
+  if(!preview) return;
+  preview.innerHTML = url ? `<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo seleccionado</span>` : "";
 }
-
 
 
 document.addEventListener("input", (e)=>{
@@ -477,6 +470,113 @@ document.addEventListener("input", (e)=>{
     }
   }
 });
+
+
+const BRANDFETCH_CLIENT_ID = "1idlKhSUIZeTbMpoWB-";
+
+function brandfetchSearchUrl(name){
+  return "https://api.brandfetch.io/v2/search/" + encodeURIComponent((name||"").trim()) + "?c=" + encodeURIComponent(BRANDFETCH_CLIENT_ID);
+}
+function brandfetchLogoUrl(domain){
+  return "https://cdn.brandfetch.io/" + encodeURIComponent(domain) + "?c=" + encodeURIComponent(BRANDFETCH_CLIENT_ID);
+}
+async function findBrandfetchLogo(name, prefix){
+  const company=(name||"").trim();
+  const status=$(`${prefix}LogoStatus`);
+  const preview=$(`${prefix}LogoPreview`);
+  if(!company){
+    if(status) status.textContent="Escribe una marca primero";
+    return;
+  }
+  if(status) status.textContent="Buscando marca…";
+  try{
+    const res=await fetch(brandfetchSearchUrl(company), {headers:{Accept:"application/json"}});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const data=await res.json();
+    const result=Array.isArray(data) ? data[0] : (data.results?.[0] || data.data?.[0] || data);
+    const domain=result?.domain || result?.url?.replace(/^https?:\/\//,"").split("/")[0];
+    if(!domain) throw new Error("No se encontró dominio");
+    const logo=brandfetchLogoUrl(domain);
+    const urlEl=$(prefix+"LogoUrl");
+    if(urlEl) urlEl.value=logo;
+    if(preview) preview.innerHTML=`<img src="${esc(logo)}" alt="Logo"><span class="logo-status">✓ ${esc(result.name||company)} · ${esc(domain)}</span>`;
+    if(status) status.textContent="Logo encontrado";
+  }catch(err){
+    if(status) status.textContent="No se encontró automáticamente. Puedes usar URL o archivo.";
+    if(preview) preview.innerHTML="";
+  }
+}
+function brandfetchPreview(prefix){
+  const urlEl=$(prefix+"LogoUrl");
+  const preview=$(prefix+"LogoPreview");
+  const status=$(prefix+"LogoStatus");
+  const url=urlEl?.value?.trim()||"";
+  if(preview) preview.innerHTML=url?`<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo seleccionado</span>`:"";
+  if(status) status.textContent=url?"Logo listo":"";
+}
+
+
+document.addEventListener("change", (e)=>{
+  const el=e.target;
+  if(!el || !el.id) return;
+  let prefix=null;
+  if(/(flight|vuelo).*company/i.test(el.id)) prefix="flight";
+  else if(/(transfer|traslado).*company/i.test(el.id)) prefix="transfer";
+  if(prefix){
+    const urlId=prefix==="flight" ? (document.getElementById("flightLogoUrl")?"flightLogoUrl":"vueloLogoUrl") : (document.getElementById("transferLogoUrl")?"transferLogoUrl":"trasladoLogoUrl");
+    const urlEl=document.getElementById(urlId);
+    if(urlEl && !urlEl.value.trim()) findBrandfetchLogo(el.value,prefix);
+  }
+});
+
+
+const PEXELS_API_KEY = "qI70c6etr0QYKUWqcRPGFNVTf6rbSoglIERqbK87Zv7vR9SkJEUBbrnm";
+
+async function searchPexelsHotel(){
+  const name = (typeof hotelCompanyValue === "function" ? hotelCompanyValue() : "").trim();
+  const qEl = document.getElementById("hotelPexelsQuery");
+  const query = (qEl?.value?.trim() || name) + " hotel";
+  const grid = document.getElementById("hotelPexelsResults");
+  const status = document.getElementById("hotelPexelsStatus");
+  if(!query.trim()) {
+    if(status) status.textContent = "Escribe primero el nombre del hotel.";
+    return;
+  }
+  if(status) status.textContent = "Buscando fotos…";
+  if(grid) grid.innerHTML = "";
+  try {
+    const res = await fetch("https://api.pexels.com/v1/search?query="+encodeURIComponent(query)+"&per_page=8&orientation=landscape", {
+      headers: { "Authorization": PEXELS_API_KEY }
+    });
+    if(!res.ok) throw new Error("Pexels HTTP "+res.status);
+    const data = await res.json();
+    const photos = data.photos || [];
+    if(!photos.length) {
+      if(status) status.textContent = "No se encontraron fotos. Prueba con otro nombre.";
+      return;
+    }
+    if(status) status.textContent = "Selecciona una foto:";
+    photos.forEach(photo => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "pexels-photo-option";
+      card.innerHTML = `<img src="${esc(photo.src?.medium || photo.src?.large)}" alt="${esc(photo.alt || query)}"><span>${esc(photo.photographer || "Pexels")}</span>`;
+      card.addEventListener("click", () => {
+        const url = photo.src?.large2x || photo.src?.large || photo.src?.original;
+        const urlEl = document.getElementById("hotelPhotoUrl") || document.getElementById("hotelImageUrl");
+        if(urlEl) urlEl.value = url;
+        const preview = document.getElementById("hotelPhotoPreview") || document.getElementById("hotelImagePreview");
+        if(preview) preview.innerHTML = `<img src="${esc(url)}" alt="Foto del hotel">`;
+        const credit = document.getElementById("hotelPhotoCredit");
+        if(credit) credit.value = `Foto: ${photo.photographer || "Pexels"} · Pexels`;
+        if(status) status.textContent = "✓ Foto seleccionada";
+      });
+      grid?.appendChild(card);
+    });
+  } catch(err) {
+    if(status) status.textContent = "No se pudo consultar Pexels. Comprueba la API key.";
+  }
+}
 
 function boot(){currentId=null;passengers=[];items=[];headerPhotoData=null;selectedItemPassengers=[];setType('Vuelos');render();renderHome()}
 boot();
