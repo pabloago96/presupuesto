@@ -37,46 +37,55 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 @media(max-width:800px){.wrap{padding:12px}.layout{grid-template-columns:1fr}.summary{position:static}.hero{min-height:205px;border-radius:20px;padding:22px}.hero h1{font-size:33px}.form-grid,.form-grid.three{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr 1fr}.item-head{align-items:flex-start}.brand-row img{max-width:170px;max-height:65px}.transfer-brand img{max-width:150px;max-height:58px}input,select,.btn{min-height:44px;font-size:16px}}
 .print-only{display:none}
 @media print{
-  @page{size:A4;margin:14mm 13mm 16mm}
+  @page{size:A4;margin:3.5mm 4mm 6mm}
   html,body{background:#fff!important}
   body{color:#16333d}
   #app,#home,.fab{display:none!important}
   #printArea{display:block!important}
-  .print-cover{height:38mm;border-radius:6mm;position:relative;overflow:hidden;margin-bottom:6mm;color:#073141;background:#eaf5f7;border:1px solid #d5e8ec}
-  .print-cover-art{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-  .print-cover-content{position:absolute;z-index:2;left:9mm;top:7mm;right:9mm;bottom:7mm;display:flex;flex-direction:column;justify-content:center}
-  .print-cover h1{font-size:22pt;line-height:1.05;margin:0 0 2mm;color:#073141;letter-spacing:-.3px}
-  .print-cover p{font-size:9.5pt;margin:0;color:#4d707b;font-weight:700}
-  .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 1mm 5mm;margin-bottom:7mm}
-  .print-summary h2{margin:0;font-size:17pt}
-  .print-total{font-size:23pt;font-weight:950;color:#073141}
-  .print-passengers{font-size:9pt;color:#6d8088;margin-top:2mm}
-  .print-items{display:grid;gap:5mm}
-  .print-card{border:1px solid #dbe6ea;border-radius:5mm;padding:5mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
-  .print-card.hotel{padding:0;overflow:hidden}
-  .print-card.hotel .print-card-body{padding:5mm}
-  .print-hotel-photo{width:100%;height:62mm;object-fit:cover;display:block}
-  .print-card-head{display:flex;justify-content:space-between;gap:8mm;align-items:flex-start}
+  .print-cover{height:20mm;border-radius:0 0 3mm 3mm;background:linear-gradient(100deg,#083a4b 0%,#176b83 55%,#4b9aaa 100%);position:relative;overflow:hidden;margin:-3.5mm -4mm 3.5mm;color:#fff;border:0}
+  .print-cover::before{content:"";position:absolute;width:90mm;height:90mm;border-radius:50%;right:-35mm;top:-55mm;background:rgba(255,255,255,.10)}
+  .print-cover::after{content:"✈  ·  ·  ·";position:absolute;right:7mm;top:5mm;font-size:11pt;letter-spacing:5px;color:rgba(255,255,255,.34);transform:rotate(-4deg)}
+  .print-cover-content{position:absolute;z-index:1;left:6mm;top:3.5mm;right:8mm;display:flex;align-items:center;gap:8mm}
+  .print-cover h1{font-size:16pt;line-height:1;margin:0;color:#fff;white-space:nowrap}
+  .print-cover p{font-size:8.5pt;margin:0;color:rgba(255,255,255,.82);white-space:nowrap}
+  .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 0 2.5mm;margin-bottom:3mm}
+  .print-summary h2{margin:0;font-size:15pt}
+  .print-total{font-size:20pt;font-weight:950;color:#073141}
+  .print-passengers{font-size:8.5pt;color:#6d8088;margin-top:1mm}
+  .print-items{display:grid;gap:2mm}
+  .print-card{border:1px solid #dbe6ea;border-radius:3.5mm;padding:2.4mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
+  .print-card.hotel{padding:0;overflow:hidden;display:grid;grid-template-columns:38mm 1fr;min-height:30mm}
+  .print-card.hotel .print-card-body{padding:2.8mm 3.2mm}
+  .print-hotel-photo{width:38mm;height:100%;min-height:30mm;object-fit:cover;object-position:center;display:block}
+  .print-card-head{display:flex;justify-content:space-between;gap:5mm;align-items:flex-start}
   .print-title{font-size:15pt;font-weight:950;line-height:1.15}
-  .print-subtitle{font-size:9.5pt;color:#6d8088;margin-top:1.5mm}
+  .print-subtitle{font-size:9.5pt;color:#6d8088;margin-top:1mm}
   .print-price{text-align:right;font-size:15pt;font-weight:950;white-space:nowrap}
   .print-per{font-size:8.5pt;color:#6d8088;font-weight:750;margin-top:1mm}
-  .print-cover-date{font-size:9pt;font-weight:850;color:#2d7e90;margin-top:2.5mm;letter-spacing:.2px}
-  .print-date{font-size:8.2pt;font-weight:850;color:#2d7e90;margin-top:1.5mm}
-  .print-flight-row{display:grid;grid-template-columns:minmax(0,1fr) 32mm;gap:5mm;align-items:center;margin-top:3mm}
-  .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:2.5mm;margin-top:0}
-  .print-flight-brand{min-height:24mm;border-left:1px solid #dbe6ea;padding-left:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5mm;text-align:center}
-  .print-flight-brand img{max-width:29mm;max-height:15mm;object-fit:contain}
+  .print-cover-date{font-size:8pt;font-weight:850;color:rgba(255,255,255,.92);margin:0 0 0 auto;letter-spacing:.2px;white-space:nowrap}
+  .print-date{font-size:8.2pt;font-weight:850;color:#2d7e90;margin-top:1mm}
+  .print-flight-row{display:grid;grid-template-columns:minmax(0,1fr) 30mm;gap:4mm;align-items:center;margin-top:1.5mm}
+  .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:2mm;margin-top:0}
+  .print-flight-brand{min-height:20mm;border-left:1px solid #dbe6ea;padding-left:3mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm;text-align:center}
+  .print-flight-brand img{max-width:28mm;max-height:14mm;object-fit:contain}
   .print-flight-brand b{font-size:8pt;color:#49636d}
-  .print-detail{background:#f4f8fa;border-radius:3mm;padding:3mm}
+  .print-detail{background:#f4f8fa;border-radius:2.5mm;padding:1.7mm}
   .print-detail small{display:block;color:#6d8088;font-size:7pt;font-weight:900;text-transform:uppercase}
   .print-detail b{display:block;margin-top:1mm;font-size:9.5pt}
-  .print-brand{display:flex;justify-content:space-between;align-items:center;gap:8mm;border-top:1px solid #dbe6ea;margin-top:4mm;padding-top:4mm}
+  .print-brand{display:flex;justify-content:space-between;align-items:center;gap:8mm;border-top:1px solid #dbe6ea;margin-top:2mm;padding-top:2mm}
   .print-brand img{max-width:48mm;max-height:20mm;object-fit:contain}
   .print-transfer .print-brand img{max-width:40mm;max-height:15mm}
-  .print-photo{width:100%;max-height:55mm;object-fit:cover;border-radius:3mm;margin-bottom:4mm}
-  .print-footer{margin-top:7mm;text-align:center;font-size:8pt;color:#8a9ba1}
+  .print-photo{width:100%;max-height:20mm;object-fit:cover;border-radius:2.5mm;margin-bottom:2.5mm}
+  .print-footer{margin-top:4mm;text-align:center;font-size:7.5pt;color:#8a9ba1}
 }
+
+.logo-auto-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.logo-auto-row input{flex:1;min-width:160px}
+.logo-preview{display:flex;align-items:center;gap:10px;margin-top:8px;min-height:42px}
+.logo-preview img{width:54px;height:36px;object-fit:contain;border-radius:6px;background:#fff;border:1px solid #dbe6ea;padding:4px}
+.logo-status{font-size:12px;color:#61757d}
+.logo-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.logo-actions button{font-size:12px;padding:6px 9px}
 </style>
 </head>
 <body>
@@ -112,6 +121,8 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
         <div class="form-grid">
           <div><label>Nombre del viaje</label><input id="tripTitle" placeholder="Nombra tu próximo viaje"></div>
           <div><label>Subtítulo</label><input id="tripSubtitle" placeholder="Ej. Octubre 2026 · 7 noches"></div>
+          <div><label>Fecha de inicio</label><input id="tripStartDate" type="date"></div>
+          <div><label>Fecha de fin</label><input id="tripEndDate" type="date"></div>
           <div><label>Fecha del viaje</label><input id="tripDate" type="date"></div>
         </div>
         <div style="margin-top:12px" class="file-url">
@@ -142,8 +153,14 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
               <div><label>Destino</label><input id="flightDestination" placeholder="Lanzarote (ACE)"></div>
               <div><label>Hora de salida</label><input id="flightDeparture" type="time"></div>
               <div><label>Hora de llegada</label><input id="flightArrival" type="time"></div>
-              <div><label>Compañía</label><input id="flightCompany" placeholder="Ryanair"></div>
-              <div class="file-url"><label>Logo de la compañía</label><input id="flightLogo" type="file" accept="image/*"><input id="flightLogoUrl" type="url" placeholder="O URL del logo"></div>
+              <div><label>Compañía</label><input id="flightCompany" placeholder="Ryanair">
+<div class="logo-auto-row">
+  <button type="button" onclick="setAutoLogo('flight')">✨ Logo automático</button>
+  <button type="button" onclick="logoPreview('flight')">👁️ Ver logo</button>
+</div>
+<div id="flightLogoPreview" class="logo-preview"></div></div>
+              <div class="file-url"><label>Logo de la compañía</label><input id="flightLogo" type="file" accept="image/*"><input id="flightLogoUrl" type="url" placeholder="O URL del logo">
+<div id="flightLogoPreview" class="logo-preview"></div></div>
             </div>
           </div>
 
@@ -159,7 +176,12 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
             <div class="form-grid">
               <div><label>Origen</label><input id="transferOrigin" placeholder="Aeropuerto"></div>
               <div><label>Destino</label><input id="transferDestination" placeholder="Hotel"></div>
-              <div><label>Compañía</label><input id="transferCompany" placeholder="Líneas Romero / Cicar"></div>
+              <div><label>Compañía</label><input id="transferCompany" placeholder="Líneas Romero / Cicar">
+<div class="logo-auto-row">
+  <button type="button" onclick="setAutoLogo('transfer')">✨ Logo automático</button>
+  <button type="button" onclick="logoPreview('transfer')">👁️ Ver logo</button>
+</div>
+<div id="transferLogoPreview" class="logo-preview"></div></div>
               <div class="file-url"><label>Logo</label><input id="transferLogo" type="file" accept="image/*"><input id="transferLogoUrl" type="url" placeholder="O URL del logo"></div>
             </div>
           </div>
@@ -213,6 +235,7 @@ let deferredInstall=null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const eur=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(Number(n)||0);
+function formatDateES(v){if(!v)return '';const [y,m,d]=v.split('-');return `${d}/${m}/${y}`}
 
 function fileToDataURL(file){return new Promise((resolve,reject)=>{if(!file)return resolve(null);const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
 async function imageValue(fileId,urlId){const f=$(fileId)?.files?.[0];if(f)return await fileToDataURL(f);return $(urlId)?.value?.trim()||null}
@@ -229,7 +252,7 @@ function showEditor(){$('home').classList.add('hidden');$('app').classList.remov
 function saveBudgetSilent(){if(!currentId)currentId='b'+Date.now();const s=snapshot(),a=loadList(),i=a.findIndex(x=>x.id===currentId);if(i>=0)a[i]=s;else a.unshift(s);saveList(a);persist()}
 function renderHome(){const box=$('budgetList'),a=loadList();if(!a.length){box.innerHTML='<div class="empty">No tienes presupuestos guardados todavía.<br><br>Pulsa «Nuevo presupuesto» para empezar.</div>';return}box.innerHTML=a.map(x=>`<div class="budget"><div><b>${esc(x.title)}</b><small>${x.items?.length||0} items · ${x.updated?new Date(x.updated).toLocaleDateString('es-ES'):''}</small></div><div class="actions"><button class="btn small" onclick="openBudget('${x.id}')">Abrir</button><button class="btn small danger" onclick="deleteBudget('${x.id}')">×</button></div></div>`).join('')}
 function setHeroPhoto(src){$('hero').style.backgroundImage=src?`linear-gradient(90deg,rgba(7,49,65,.82),rgba(7,49,65,.22)),url("${src}")`:'linear-gradient(90deg,rgba(7,49,65,.82),rgba(7,49,65,.22)),linear-gradient(135deg,#0a5268,#8bb7c4)'}
-function updateHero(){ $('heroTitle').textContent=$('tripTitle').value.trim()||'Nombra tu próximo viaje';$('heroSubtitle').textContent=$('tripSubtitle').value.trim()||'Presupuesto de viaje';if($('tripPhotoUrl').value.trim())setHeroPhoto($('tripPhotoUrl').value.trim())}
+function updateHero(){ $('heroTitle').textContent=$('tripTitle').value.trim()||'Nombra tu próximo viaje';let sub=$('tripSubtitle').value.trim()||'Presupuesto de viaje';const a=$('tripStartDate')?.value,b=$('tripEndDate')?.value;if(a||b) sub += (sub?' · ':'') + (a?formatDateES(a):'') + (b?' — '+formatDateES(b):'');$('heroSubtitle').textContent=sub;if($('tripPhotoUrl').value.trim())setHeroPhoto($('tripPhotoUrl').value.trim())}
 function addPassenger(){const n=$('passengerName').value.trim();if(!n)return;if(!passengers.includes(n))passengers.push(n);$('passengerName').value='';selectedItemPassengers=[...passengers];render();persist()}
 function toggleItemPassenger(n){selectedItemPassengers=selectedItemPassengers.includes(n)?selectedItemPassengers.filter(x=>x!==n):[...selectedItemPassengers,n];renderItemPassengers()}
 function renderPassengers(){ $('passengerList').innerHTML=passengers.length?passengers.map(n=>`<button class="passenger-chip" onclick="removePassenger('${esc(n)}')">${esc(n)} ×</button>`).join(''):'<span class="muted">Añade pasajeros para poder repartir los costes.</span>'}
@@ -278,7 +301,7 @@ function enableDrag(){
  })
 }
 function syncOrder(){const ids=[...$('items').querySelectorAll('.item')].map(x=>Number(x.dataset.index));items=ids.map(i=>items[i]);render();persist()}
-$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripDate').addEventListener('change',()=>{persist();renderPrint()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist();renderPrint()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
+$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripStartDate')?.addEventListener('input',()=>{updateHero();persist()});$('tripEndDate')?.addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripDate').addEventListener('change',()=>{persist();renderPrint()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist();renderPrint()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
 async function installPWA(){if(!deferredInstall){alert('En iPhone: Safari → Compartir → Añadir a pantalla de inicio.');return}deferredInstall.prompt();deferredInstall=null}
 
@@ -289,6 +312,8 @@ function renderPrint(){
   const title=$('tripTitle').value.trim()||'Nombra tu próximo viaje';
   const subtitle=$('tripSubtitle').value.trim()||'Presupuesto de viaje';
   const tripDate=$('tripDate').value;
+  const tripStart=$('tripStartDate')?.value||'';
+  const tripEnd=$('tripEndDate')?.value||'';
   const photo=headerPhotoData||$('tripPhotoUrl').value.trim();
   const coverPhoto='';
   const coverArt=`<svg class="print-cover-art" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
@@ -345,7 +370,7 @@ function renderPrint(){
           <div><div class="print-title">🏨 ${esc(x.name||'Hotel')}</div><div class="print-subtitle">${esc(x.stars||'5')} 🌟</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
           <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
         </div>
-        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></div>
+        <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div></div>
       </article>`;
     }
     if(x.type==='Traslados'){
@@ -355,20 +380,79 @@ function renderPrint(){
         <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
         <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
         ${x.logo?`<div class="print-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
-        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div>
+        <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div>
       </article>`;
     }
     return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||'Imprimir')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
       <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
-      <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></article>`;
+      <div class="print-subtitle" style="margin-top:2mm">Pasajeros: ${esc(who)}</div></article>`;
   }).join('');
   area.innerHTML=`<section class="print-cover">${coverArt}
-    <div class="print-cover-content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p>${tripDate?`<div class="print-cover-date">${esc(formatDate(tripDate))}</div>`:''}</div>
+    <div class="print-cover-content"><div><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div><div class="print-cover-date">${tripStart||tripEnd?`${tripStart?esc(formatDate(tripStart)):''}${tripStart&&tripEnd?' — ':''}${tripEnd?esc(formatDate(tripEnd)):''}`:(tripDate?esc(formatDate(tripDate)):'')}</div></div>
   </section>
   <div class="print-summary"><div><h2>Resumen del viaje</h2><div class="print-passengers">${esc(passengerLine)}</div></div><div class="print-total">${eur(total)}</div></div>
   <section class="print-items">${cards || '<div class="print-card">No hay items añadidos.</div>'}</section>
   <div class="print-footer">Presupuesto · ${new Date().toLocaleDateString('es-ES')}</div>`;
 }
+
+const SIMPLE_ICON_ALIASES = {
+  "iberia":"iberia","ryanair":"ryanair","vueling":"vueling","air europa":"air-europa",
+  "air-europa":"air-europa","binter":"binter","canaryfly":"canaryfly","canary fly":"canaryfly",
+  "easyjet":"easyjet","easy jet":"easyjet","wizz air":"wizz-air","wizzair":"wizz-air",
+  "volotea":"volotea","transavia":"transavia","lufthansa":"lufthansa","air france":"air-france",
+  "airfrance":"air-france","klm":"klm","british airways":"british-airways","britishairways":"british-airways",
+  "qatar airways":"qatar-airways","emirates":"emirates","tap":"tap-air-portugal","tap air portugal":"tap-air-portugal",
+  "american airlines":"american-airlines","united":"united","united airlines":"united-airlines",
+  "delta":"delta","latam":"latam","cicar":"cicar","líneas romero":"lineas-romero","lineas romero":"lineas-romero",
+  "líneas romero ferry":"lineas-romero"
+};
+
+function logoSlug(name){
+  const n=(name||"").trim().toLowerCase().replace(/\s+/g," ");
+  return SIMPLE_ICON_ALIASES[n] || n.replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+}
+function autoLogoUrl(name){
+  const slug=logoSlug(name);
+  return slug ? `https://cdn.simpleicons.org/${encodeURIComponent(slug)}` : "";
+}
+function setAutoLogo(prefix){
+  const company=$(prefix+"Company")?.value?.trim() || "";
+  const url=autoLogoUrl(company);
+  const urlEl=$(prefix+"LogoUrl");
+  if(urlEl) urlEl.value=url;
+  const preview=$(prefix+"LogoPreview");
+  if(preview){
+    preview.innerHTML = url ? `<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo automático: ${esc(company)}</span>` : "";
+  }
+}
+function clearAutoLogo(prefix){
+  const urlEl=$(prefix+"LogoUrl");
+  if(urlEl) urlEl.value="";
+  const preview=$(prefix+"LogoPreview");
+  if(preview) preview.innerHTML="";
+}
+function logoPreview(prefix){
+  const urlEl=$(prefix+"LogoUrl");
+  const url=urlEl?.value?.trim()||"";
+  const preview=$(prefix+"LogoPreview");
+  if(!preview) return;
+  preview.innerHTML = url ? `<img src="${esc(url)}" alt="Logo"><span class="logo-status">Logo seleccionado</span>` : "";
+}
+
+
+document.addEventListener("input", (e)=>{
+  const el=e.target;
+  if(!el || !el.id) return;
+  if(/(flight|vuelo).*company/i.test(el.id) || /(transfer|traslado).*company/i.test(el.id)){
+    const prefix=/(transfer|traslado)/i.test(el.id) ? "transfer" : "flight";
+    const urlId=prefix==="flight" ? (document.getElementById("flightLogoUrl")?"flightLogoUrl":"vueloLogoUrl") : (document.getElementById("transferLogoUrl")?"transferLogoUrl":"trasladoLogoUrl");
+    const urlEl=document.getElementById(urlId);
+    if(urlEl && !urlEl.value.trim()) {
+      // Only prepare; user clicks the button to avoid surprising network calls.
+    }
+  }
+});
+
 function boot(){currentId=null;passengers=[];items=[];headerPhotoData=null;selectedItemPassengers=[];setType('Vuelos');render();renderHome()}
 boot();
 </script>
