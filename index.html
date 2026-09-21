@@ -37,40 +37,45 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
 @media(max-width:800px){.wrap{padding:12px}.layout{grid-template-columns:1fr}.summary{position:static}.hero{min-height:205px;border-radius:20px;padding:22px}.hero h1{font-size:33px}.form-grid,.form-grid.three{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr 1fr}.item-head{align-items:flex-start}.brand-row img{max-width:170px;max-height:65px}.transfer-brand img{max-width:150px;max-height:58px}input,select,.btn{min-height:44px;font-size:16px}}
 .print-only{display:none}
 @media print{
-  @page{size:A4;margin:11mm 11mm 13mm}
+  @page{size:A4;margin:14mm 13mm 16mm}
   html,body{background:#fff!important}
   body{color:#16333d}
   #app,#home,.fab{display:none!important}
   #printArea{display:block!important}
-  .print-cover{height:34mm;border-radius:6mm;position:relative;overflow:hidden;margin-bottom:5mm;color:#fff;background:linear-gradient(135deg,#073141,#176b83,#3c8da1)}
-  .print-cover-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,49,65,.15),rgba(7,49,65,.02));z-index:1}
-  .print-cover-content{position:absolute;z-index:2;left:8mm;bottom:6mm;right:8mm}
-  .print-cover h1{font-size:21pt;line-height:1.05;margin:0 0 2mm;color:#fff}
-  .print-cover p{font-size:9pt;margin:0;color:#eef7f9}
-  .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 1mm 3mm;margin-bottom:4mm}
-  .print-summary h2{margin:0;font-size:13pt}
-  .print-total{font-size:18pt;font-weight:950;color:#073141}
-  .print-passengers{font-size:7.5pt;color:#6d8088;margin-top:1mm}
-  .print-items{display:grid;gap:3mm}
-  .print-card{border:1px solid #dbe6ea;border-radius:3.5mm;padding:3.2mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
+  .print-cover{height:38mm;border-radius:6mm;position:relative;overflow:hidden;margin-bottom:6mm;color:#073141;background:#eaf5f7;border:1px solid #d5e8ec}
+  .print-cover-art{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .print-cover-content{position:absolute;z-index:2;left:9mm;top:7mm;right:9mm;bottom:7mm;display:flex;flex-direction:column;justify-content:center}
+  .print-cover h1{font-size:22pt;line-height:1.05;margin:0 0 2mm;color:#073141;letter-spacing:-.3px}
+  .print-cover p{font-size:9.5pt;margin:0;color:#4d707b;font-weight:700}
+  .print-summary{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #dbe6ea;padding:0 1mm 5mm;margin-bottom:7mm}
+  .print-summary h2{margin:0;font-size:17pt}
+  .print-total{font-size:23pt;font-weight:950;color:#073141}
+  .print-passengers{font-size:9pt;color:#6d8088;margin-top:2mm}
+  .print-items{display:grid;gap:5mm}
+  .print-card{border:1px solid #dbe6ea;border-radius:5mm;padding:5mm;break-inside:avoid;page-break-inside:avoid;background:#fff}
   .print-card.hotel{padding:0;overflow:hidden}
-  .print-card.hotel .print-card-body{padding:3.2mm}
-  .print-hotel-photo{width:100%;height:34mm;object-fit:cover;display:block}
-  .print-card-head{display:flex;justify-content:space-between;gap:5mm;align-items:flex-start}
-  .print-title{font-size:11.5pt;font-weight:950;line-height:1.1}
-  .print-subtitle{font-size:7.5pt;color:#6d8088;margin-top:1mm}
-  .print-price{text-align:right;font-size:11.5pt;font-weight:950;white-space:nowrap}
-  .print-per{font-size:7pt;color:#6d8088;font-weight:750;margin-top:.5mm}
-  .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:2mm;margin-top:2.5mm}
-  .print-detail{background:#f4f8fa;border-radius:2mm;padding:2mm}
-  .print-detail small{display:block;color:#6d8088;font-size:5.8pt;font-weight:900;text-transform:uppercase}
-  .print-detail b{display:block;margin-top:.7mm;font-size:8pt}
-  .print-brand{display:flex;justify-content:space-between;align-items:center;gap:5mm;border-top:1px solid #dbe6ea;margin-top:2.5mm;padding-top:2.5mm}
-  .print-brand img{max-width:38mm;max-height:12mm;object-fit:contain}
-  .print-transfer .print-brand img{max-width:32mm;max-height:10mm}
-  .print-photo{width:100%;max-height:28mm;object-fit:cover;border-radius:2mm;margin-bottom:2.5mm}
-  .print-date{font-size:7.5pt;color:#176b83;font-weight:900;margin:1mm 0 2mm}
-  .print-footer{margin-top:4mm;text-align:center;font-size:6.5pt;color:#8a9ba1}
+  .print-card.hotel .print-card-body{padding:5mm}
+  .print-hotel-photo{width:100%;height:62mm;object-fit:cover;display:block}
+  .print-card-head{display:flex;justify-content:space-between;gap:8mm;align-items:flex-start}
+  .print-title{font-size:15pt;font-weight:950;line-height:1.15}
+  .print-subtitle{font-size:9.5pt;color:#6d8088;margin-top:1.5mm}
+  .print-price{text-align:right;font-size:15pt;font-weight:950;white-space:nowrap}
+  .print-per{font-size:8.5pt;color:#6d8088;font-weight:750;margin-top:1mm}
+  .print-cover-date{font-size:9pt;font-weight:850;color:#2d7e90;margin-top:2.5mm;letter-spacing:.2px}
+  .print-date{font-size:8.2pt;font-weight:850;color:#2d7e90;margin-top:1.5mm}
+  .print-flight-row{display:grid;grid-template-columns:minmax(0,1fr) 32mm;gap:5mm;align-items:center;margin-top:3mm}
+  .print-flight-details{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:2.5mm;margin-top:0}
+  .print-flight-brand{min-height:24mm;border-left:1px solid #dbe6ea;padding-left:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5mm;text-align:center}
+  .print-flight-brand img{max-width:29mm;max-height:15mm;object-fit:contain}
+  .print-flight-brand b{font-size:8pt;color:#49636d}
+  .print-detail{background:#f4f8fa;border-radius:3mm;padding:3mm}
+  .print-detail small{display:block;color:#6d8088;font-size:7pt;font-weight:900;text-transform:uppercase}
+  .print-detail b{display:block;margin-top:1mm;font-size:9.5pt}
+  .print-brand{display:flex;justify-content:space-between;align-items:center;gap:8mm;border-top:1px solid #dbe6ea;margin-top:4mm;padding-top:4mm}
+  .print-brand img{max-width:48mm;max-height:20mm;object-fit:contain}
+  .print-transfer .print-brand img{max-width:40mm;max-height:15mm}
+  .print-photo{width:100%;max-height:55mm;object-fit:cover;border-radius:3mm;margin-bottom:4mm}
+  .print-footer{margin-top:7mm;text-align:center;font-size:8pt;color:#8a9ba1}
 }
 </style>
 </head>
@@ -107,6 +112,7 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
         <div class="form-grid">
           <div><label>Nombre del viaje</label><input id="tripTitle" placeholder="Nombra tu próximo viaje"></div>
           <div><label>Subtítulo</label><input id="tripSubtitle" placeholder="Ej. Octubre 2026 · 7 noches"></div>
+          <div><label>Fecha del viaje</label><input id="tripDate" type="date"></div>
         </div>
         <div style="margin-top:12px" class="file-url">
           <label>📸 Foto para el encabezado</label>
@@ -128,10 +134,6 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
             <button class="type-tab" data-type="Hoteles" onclick="setType('Hoteles')">🏨 Hoteles</button>
             <button class="type-tab" data-type="Traslados" onclick="setType('Traslados')">🚐 Traslados</button>
             <button class="type-tab" data-type="Imprimir" onclick="setType('Imprimir')">🖨️ Imprimir</button>
-          </div>
-
-          <div class="form-grid" style="margin-bottom:12px">
-            <div><label>Fecha</label><input id="itemDate" type="date"></div>
           </div>
 
           <div id="flightFields">
@@ -173,6 +175,7 @@ label{display:block;font-size:12px;font-weight:800;color:#516a74;margin-bottom:6
           </div>
 
           <div class="form-grid" style="margin-top:12px">
+            <div><label>Fecha del item</label><input id="itemDate" type="date"></div>
             <div><label>Precio total (€)</label><input id="itemPrice" type="number" min="0" step="0.01" placeholder="1000"></div>
             <div><label>Pasajeros que comparten este coste</label><div id="itemPassengers" class="passengers"></div></div>
           </div>
@@ -213,13 +216,13 @@ const eur=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).fo
 
 function fileToDataURL(file){return new Promise((resolve,reject)=>{if(!file)return resolve(null);const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
 async function imageValue(fileId,urlId){const f=$(fileId)?.files?.[0];if(f)return await fileToDataURL(f);return $(urlId)?.value?.trim()||null}
-function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({currentId,passengers,items,title:$('tripTitle').value,subtitle:$('tripSubtitle').value,photo:headerPhotoData||$('tripPhotoUrl').value.trim()}))}catch(e){}}
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({currentId,passengers,items,title:$('tripTitle').value,subtitle:$('tripSubtitle').value,photo:headerPhotoData||$('tripPhotoUrl').value.trim(),tripDate:$('tripDate').value}))}catch(e){}}
 function loadList(){try{return JSON.parse(localStorage.getItem(LIST_KEY)||'[]')}catch(e){return[]}}
 function saveList(a){localStorage.setItem(LIST_KEY,JSON.stringify(a))}
-function snapshot(){return {id:currentId||('b'+Date.now()),title:$('tripTitle').value.trim()||'Nuevo viaje',subtitle:$('tripSubtitle').value.trim(),passengers,items,photo:headerPhotoData||$('tripPhotoUrl').value.trim(),updated:new Date().toISOString()}}
+function snapshot(){return {id:currentId||('b'+Date.now()),title:$('tripTitle').value.trim()||'Nuevo viaje',subtitle:$('tripSubtitle').value.trim(),passengers,items,photo:headerPhotoData||$('tripPhotoUrl').value.trim(),tripDate:$('tripDate').value,updated:new Date().toISOString()}}
 function saveBudget(){if(!currentId)currentId='b'+Date.now();const s=snapshot(),a=loadList(),i=a.findIndex(x=>x.id===currentId);if(i>=0)a[i]=s;else a.unshift(s);saveList(a);persist();renderHome();alert('Presupuesto guardado');}
-function newBudget(){currentId='b'+Date.now();passengers=[];items=[];headerPhotoData=null;clearAll();$('tripTitle').value='';$('tripSubtitle').value='';$('tripPhotoUrl').value='';setHeroPhoto(null);showEditor();render()}
-function openBudget(id){const s=loadList().find(x=>x.id===id);if(!s)return;currentId=s.id;passengers=s.passengers||[];items=s.items||[];headerPhotoData=(s.photo||'').startsWith('data:')?s.photo:null;$('tripTitle').value=s.title||'';$('tripSubtitle').value=s.subtitle||'';$('tripPhotoUrl').value=(s.photo||'').startsWith('data:')?'':(s.photo||'');setHeroPhoto(s.photo||null);showEditor();render()}
+function newBudget(){currentId='b'+Date.now();passengers=[];items=[];headerPhotoData=null;clearAll();$('tripTitle').value='';$('tripSubtitle').value='';$('tripDate').value='';$('tripPhotoUrl').value='';setHeroPhoto(null);showEditor();render()}
+function openBudget(id){const s=loadList().find(x=>x.id===id);if(!s)return;currentId=s.id;passengers=s.passengers||[];items=s.items||[];headerPhotoData=(s.photo||'').startsWith('data:')?s.photo:null;$('tripTitle').value=s.title||'';$('tripSubtitle').value=s.subtitle||'';$('tripDate').value=s.tripDate||'';$('tripPhotoUrl').value=(s.photo||'').startsWith('data:')?'':(s.photo||'');setHeroPhoto(s.photo||null);showEditor();render()}
 function deleteBudget(id){if(!confirm('¿Eliminar este presupuesto?'))return;saveList(loadList().filter(x=>x.id!==id));renderHome()}
 function showHome(){if(currentId)saveBudgetSilent();renderHome();$('home').classList.remove('hidden');$('app').classList.add('hidden')}
 function showEditor(){$('home').classList.add('hidden');$('app').classList.remove('hidden')}
@@ -237,7 +240,7 @@ function renderStars(){$('hotelStars').innerHTML=['1','2','3','4','5','5 Gran Lu
 async function addItem(){
   const price=Number($('itemPrice').value);if(!Number.isFinite(price)||price<0){alert('Introduce un precio válido.');return}
   if(!selectedItemPassengers.length){alert('Selecciona al menos un pasajero para este item.');return}
-  const item={type,price,passengers:[...selectedItemPassengers],photo:null,logo:null,date:$('itemDate').value||'',created:Date.now()};
+  const item={type,price,passengers:[...selectedItemPassengers],photo:null,logo:null,date:$('itemDate').value,created:Date.now()};
   if(type==='Vuelos'){item.origin=$('flightOrigin').value.trim();item.destination=$('flightDestination').value.trim();item.departure=$('flightDeparture').value;item.arrival=$('flightArrival').value;item.company=$('flightCompany').value.trim();item.logo=await imageValue('flightLogo','flightLogoUrl')}
   if(type==='Hoteles'){item.name=$('hotelName').value.trim();item.stars=selectedStars;item.photo=await imageValue('hotelPhoto','hotelPhotoUrl')}
   if(type==='Traslados'){item.origin=$('transferOrigin').value.trim();item.destination=$('transferDestination').value.trim();item.company=$('transferCompany').value.trim();item.logo=await imageValue('transferLogo','transferLogoUrl')}
@@ -261,7 +264,7 @@ function renderItems(){
   else if(x.type==='Hoteles') body=`${x.photo?`<img class="item-photo hotel-photo" src="${esc(x.photo)}" alt="Hotel">`:''}<div class="item-head"><div><div class="item-title">🏨 ${esc(x.name||'Hotel')}</div><div class="item-meta">${esc(x.stars||'5')} 🌟</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
   else if(x.type==='Traslados') body=`<div class="item-head"><div><div class="item-title">🚐 ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div><div class="item-meta">${esc(x.company||'Sin compañía')}</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>${x.logo?`<div class="brand-row transfer-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}`;
   else body=`<div class="item-head"><div><div class="item-title">🖨️ ${esc(x.title||'Imprimir')}</div><div class="item-meta">Bloque para impresión</div></div><div class="price">${eur(x.price)}<div class="per">${eur(per)} / pasajero</div></div></div>`;
-  return `<article class="item" draggable="true" data-index="${i}">${x.photo&&x.type!=='Hoteles'?`<img class="item-photo" src="${esc(x.photo)}" alt="Foto">`:''}${body}<div class="item-meta" style="margin-top:12px">${x.date?`Fecha: ${esc(new Date(x.date+'T00:00:00').toLocaleDateString('es-ES'))} · `:''}Pasajeros: ${x.passengers.map(esc).join(', ')}</div><div class="actions screen-only" style="margin-top:12px"><button class="btn small" onclick="moveItem(${i},-1)" ${i===0?'disabled':''}>↑ Subir</button><button class="btn small" onclick="moveItem(${i},1)" ${i===items.length-1?'disabled':''}>↓ Bajar</button><button class="btn small danger remove" onclick="removeItem(${i})">Eliminar</button></div></article>`
+  return `<article class="item" draggable="true" data-index="${i}">${x.photo&&x.type!=='Hoteles'?`<img class="item-photo" src="${esc(x.photo)}" alt="Foto">`:''}${body}${x.date?`<div class="item-meta" style="margin-top:8px"><b>${formatDate(x.date)}</b></div>`:''}<div class="item-meta" style="margin-top:12px">Pasajeros: ${x.passengers.map(esc).join(', ')}</div><div class="actions screen-only" style="margin-top:12px"><button class="btn small" onclick="moveItem(${i},-1)" ${i===0?'disabled':''}>↑ Subir</button><button class="btn small" onclick="moveItem(${i},1)" ${i===items.length-1?'disabled':''}>↓ Bajar</button><button class="btn small danger remove" onclick="removeItem(${i})">Eliminar</button></div></article>`
  }).join('');
  enableDrag()
 }
@@ -275,43 +278,71 @@ function enableDrag(){
  })
 }
 function syncOrder(){const ids=[...$('items').querySelectorAll('.item')].map(x=>Number(x.dataset.index));items=ids.map(i=>items[i]);render();persist()}
-$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist();renderPrint()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
+$('tripTitle').addEventListener('input',()=>{updateHero();persist()});$('tripSubtitle').addEventListener('input',()=>{updateHero();persist()});$('tripDate').addEventListener('change',()=>{persist();renderPrint()});$('tripPhotoUrl').addEventListener('input',()=>{headerPhotoData=null;updateHero();persist();renderPrint()});$('tripPhoto').addEventListener('change',async()=>{const v=await fileToDataURL($('tripPhoto').files[0]);if(v){headerPhotoData=v;setHeroPhoto(v);persist();renderPrint()}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
 async function installPWA(){if(!deferredInstall){alert('En iPhone: Safari → Compartir → Añadir a pantalla de inicio.');return}deferredInstall.prompt();deferredInstall=null}
 
+function formatDate(v){if(!v)return '';const d=new Date(v+'T12:00:00');return d.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}).replace(/^./,c=>c.toUpperCase())}
 function renderPrint(){
   const area=$('printArea');
   const total=items.reduce((sum,x)=>sum+Number(x.price||0),0);
   const title=$('tripTitle').value.trim()||'Nombra tu próximo viaje';
   const subtitle=$('tripSubtitle').value.trim()||'Presupuesto de viaje';
+  const tripDate=$('tripDate').value;
+  const photo=headerPhotoData||$('tripPhotoUrl').value.trim();
+  const coverPhoto='';
+  const coverArt=`<svg class="print-cover-art" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="coverGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#e7f4f6"/>
+        <stop offset="55%" stop-color="#f5fbfc"/>
+        <stop offset="100%" stop-color="#dceff2"/>
+      </linearGradient>
+      <linearGradient id="coverLine" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#5fa8b8" stop-opacity=".05"/>
+        <stop offset="45%" stop-color="#5fa8b8" stop-opacity=".45"/>
+        <stop offset="100%" stop-color="#5fa8b8" stop-opacity=".05"/>
+      </linearGradient>
+    </defs>
+    <rect width="1000" height="220" fill="url(#coverGrad)"/>
+    <circle cx="880" cy="42" r="100" fill="#7fc0ca" opacity=".10"/>
+    <circle cx="965" cy="150" r="150" fill="#3d8fa1" opacity=".07"/>
+    <path d="M560 195 C660 35 790 30 970 110" fill="none" stroke="url(#coverLine)" stroke-width="5"/>
+    <path d="M575 195 C675 50 800 48 965 115" fill="none" stroke="#6eafba" stroke-width="2" stroke-dasharray="7 9" opacity=".55"/>
+    <circle cx="970" cy="113" r="7" fill="#5b9eac" opacity=".6"/>
+    <g transform="translate(825 46) rotate(13)" fill="#2d7e90" opacity=".38">
+      <path d="M0 13 L55 0 L59 4 L35 15 L55 28 L51 31 L27 20 L4 25 L0 21 L19 15 Z"/>
+    </g>
+    <circle cx="120" cy="-20" r="120" fill="#ffffff" opacity=".32"/>
+  </svg>`;
   const passengerLine=passengers.length ? passengers.join(' · ') : 'Sin pasajeros';
   let cards=items.map(x=>{
     const per=x.passengers.length?x.price/x.passengers.length:0;
     const who=x.passengers.join(', ');
-    const date=x.date ? new Date(x.date+'T00:00:00').toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'}) : '';
     if(x.type==='Vuelos'){
-      return `<article class="print-card">
+      return `<article class="print-card print-flight">
         ${x.photo?`<img class="print-photo" src="${esc(x.photo)}" alt="">`:''}
         <div class="print-card-head">
           <div><div class="print-title">✈️ ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div>
-          <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div></div>
+          <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
           <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
         </div>
-        ${date?`<div class="print-date">${esc(date)}</div>`:''}
-        <div class="print-flight-details">
-          <div class="print-detail"><small>Origen</small><b>${esc(x.origin||'—')}</b></div>
-          <div class="print-detail"><small>Destino</small><b>${esc(x.destination||'—')}</b></div>
-          <div class="print-detail"><small>Horario</small><b>${esc(x.departure||'—')} → ${esc(x.arrival||'—')}</b></div>
+        <div class="print-flight-row">
+          <div class="print-flight-details">
+            <div class="print-detail"><small>Origen</small><b>${esc(x.origin||'—')}</b></div>
+            <div class="print-detail"><small>Destino</small><b>${esc(x.destination||'—')}</b></div>
+            <div class="print-detail"><small>Horario</small><b>${esc(x.departure||'—')} → ${esc(x.arrival||'—')}</b></div>
+          </div>
+          <div class="print-flight-brand">${x.logo?`<img src="${esc(x.logo)}" alt="Logo">`:''}<b>${esc(x.company||'')}</b></div>
         </div>
-        ${x.logo?`<div class="print-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
-        <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div>
+        <div class="print-subtitle" style="margin-top:2.5mm">Pasajeros: ${esc(who)}</div>
       </article>`;
     }
     if(x.type==='Hoteles'){
       return `<article class="print-card hotel">
         ${x.photo?`<img class="print-hotel-photo" src="${esc(x.photo)}" alt="">`:''}
-        <div class="print-card-body">${date?`<div class="print-date">${esc(date)}</div>`:''}<div class="print-card-head">
-          <div><div class="print-title">🏨 ${esc(x.name||'Hotel')}</div><div class="print-subtitle">${esc(x.stars||'5')} 🌟</div></div>
+        <div class="print-card-body"><div class="print-card-head">
+          <div><div class="print-title">🏨 ${esc(x.name||'Hotel')}</div><div class="print-subtitle">${esc(x.stars||'5')} 🌟</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
           <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div>
         </div>
         <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></div>
@@ -321,20 +352,18 @@ function renderPrint(){
       return `<article class="print-card print-transfer">
         ${x.photo?`<img class="print-photo" src="${esc(x.photo)}" alt="">`:''}
         <div class="print-card-head"><div><div class="print-title">🚐 ${esc(x.origin||'Origen')} → ${esc(x.destination||'Destino')}</div>
-        <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div></div>
+        <div class="print-subtitle">${esc(x.company||'Sin compañía')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
         <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
-        ${date?`<div class="print-date">${esc(date)}</div>`:''}
         ${x.logo?`<div class="print-brand"><b>${esc(x.company||'')}</b><img src="${esc(x.logo)}" alt="Logo"></div>`:''}
         <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div>
       </article>`;
     }
-    return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||'Imprimir')}</div></div>
+    return `<article class="print-card"><div class="print-card-head"><div><div class="print-title">🖨️ ${esc(x.title||'Imprimir')}</div>${x.date?`<div class="print-date">${esc(formatDate(x.date))}</div>`:''}</div>
       <div class="print-price">${eur(x.price)}<div class="print-per">${eur(per)} / pasajero</div></div></div>
-      ${date?`<div class="print-date">${esc(date)}</div>`:''}
       <div class="print-subtitle" style="margin-top:3mm">Pasajeros: ${esc(who)}</div></article>`;
   }).join('');
-  area.innerHTML=`<section class="print-cover"><div class="print-cover-overlay"></div>
-    <div class="print-cover-content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p></div>
+  area.innerHTML=`<section class="print-cover">${coverArt}
+    <div class="print-cover-content"><h1>${esc(title)}</h1><p>${esc(subtitle)}</p>${tripDate?`<div class="print-cover-date">${esc(formatDate(tripDate))}</div>`:''}</div>
   </section>
   <div class="print-summary"><div><h2>Resumen del viaje</h2><div class="print-passengers">${esc(passengerLine)}</div></div><div class="print-total">${eur(total)}</div></div>
   <section class="print-items">${cards || '<div class="print-card">No hay items añadidos.</div>'}</section>
